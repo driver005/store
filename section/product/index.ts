@@ -1,0 +1,12 @@
+export { default as Swatch } from './Swatch'
+export { default as ProductView } from './View'
+export { default as ProductCard } from './ProductCard'
+export { default as ProductSlider } from './Slider'
+export { default as ProductSize } from './Size'
+export { default as ProductTag } from './Tag'
+export { default as ProductSidebar } from './Sidebar'
+export { default as ProductDescription } from './Description'
+export { default as ProductInfo } from './Info'
+export { default as ProductReview } from './Review'
+export { Stars, Comments } from './Review'
+

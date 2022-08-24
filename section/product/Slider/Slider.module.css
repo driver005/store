@@ -1,0 +1,33 @@
+.slider {
+    @apply transition-opacity duration-150;
+}
+
+.thumb {
+    @apply transition-transform transition-colors
+    ease-linear duration-75 overflow-hidden inline-block
+    cursor-pointer h-full
+    ml-2 rounded-lg my-1 shadow-xl shadow-gray-300/50;
+    width: 85px;
+    width: calc(100% / 3);
+    max-height: 125px;
+}
+
+.thumb.selected {
+    @apply bg-white shadow-purple-400/50;
+}
+
+.thumb img {
+    height: 85% !important;
+}
+
+@screen md {
+    .thumb:hover {
+        transform: scale(1.02);
+    }
+    .thumb {
+        max-height: 110px !important;
+    }
+    .thumb {
+        width: 85px;
+    }
+}
