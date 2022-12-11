@@ -1,14 +1,17 @@
-import { Box } from "@chakra-ui/react"
+import { Box, chakra } from "@chakra-ui/react"
+import { Nav } from "@section/store"
 
 
 
 interface WrapperProps {
     children: React.ReactNode
+    bgColor?: string
 }
 
 
 const Wrapper: React.FC<WrapperProps> = ({
-    children
+    children,
+    bgColor = 'white',
 }) => {
 
     return (
@@ -17,9 +20,12 @@ const Wrapper: React.FC<WrapperProps> = ({
             w='100vw'
             h='100vh'
             overflowX='hidden'
-            position='relative'
+            bgColor={bgColor}
         >
-            {children}
+            <Nav />
+            <chakra.main position='relative'>
+                {children}
+            </chakra.main>
         </Box>
     )
 }

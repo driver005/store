@@ -21,6 +21,7 @@
             "@section/*": ["section/*"],
             "@utils/*": ["utils/*"],
             "@assets/*": ["assets/*"],
+            "@lib/*": ["lib/*"],
         },
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
