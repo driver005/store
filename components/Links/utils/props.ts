@@ -5,6 +5,7 @@ export interface LinkProps {
     size?: number;
     active?: boolean;
     bold?: boolean;
+    isHoverBold?: boolean;
     replace?: boolean;
     onClick?: any;
     onMouseEnter?: any;

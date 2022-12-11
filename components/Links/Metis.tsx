@@ -2,7 +2,7 @@ import { chakra } from "@chakra-ui/react";
 import Link from "next/link";
 import { LinkProps } from "./utils";
 
-export const LinkMetis: React.FC<LinkProps> = ({ link, label, icon, size = 18, active = false, bold = false, replace = false, onClick, onMouseEnter }) => {
+export const LinkMetis: React.FC<LinkProps> = ({ link, label, icon, size = 18, active = false, bold = false, isHoverBold = false, replace = false, onClick, onMouseEnter }) => {
     return (
         <Link
             href={link}
@@ -24,7 +24,7 @@ export const LinkMetis: React.FC<LinkProps> = ({ link, label, icon, size = 18, a
                         'content': '""',
                         'position': 'absolute',
                         'width': '100%',
-                        'height': `${bold ? '2px' : '1px'}`,
+                        'height': `${(bold || isHoverBold) ? '2px' : '1px'}`,
                         'background': 'currentColor',
                         'top': '100%',
                         'left': '0',
