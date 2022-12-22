@@ -1,20 +1,25 @@
-import { Box, Flex, useBreakpointValue } from "@chakra-ui/react"
-import { FC } from "react"
+import { Box, Flex, useBreakpointValue } from '@chakra-ui/react'
+import { FC } from 'react'
 import { ProductSlider } from '@section/product'
-import Image from "next/image"
-import { Product } from "@medusajs/medusa"
-
+import Image from 'next/image'
+import { Product } from '@medusajs/medusa'
 
 interface ImageGalleryProps {
     product: Product
 }
 
 const ImageGallery: FC<ImageGalleryProps> = ({ product }) => {
-    const imageW = useBreakpointValue({ lg: '800px' });
+    const imageW = useBreakpointValue({ lg: '800px' })
     return (
-        <Flex flexDirection='column' gridColumn='span 8 / span 8' minH='500px'>
+        <Flex flexDirection="column" gridColumn="span 8 / span 8" minH="500px">
             {product?.images && (
-                <Flex position='sticky' top='0' alignItems='center' justifyContent='center' overflowX='hidden'>
+                <Flex
+                    position="sticky"
+                    top="0"
+                    alignItems="center"
+                    justifyContent="center"
+                    overflowX="hidden"
+                >
                     <ProductSlider key={product.id}>
                         {product.images.map((image: any, i: any) => (
                             <Box key={i} maxH={imageW}>

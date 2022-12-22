@@ -1,14 +1,14 @@
-import { medusaClient } from "@lib/config"
-import { handleError } from "@lib/util/handle-error"
-import { Region } from "@medusajs/medusa"
+import { medusaClient } from '@lib/config'
+import { handleError } from '@lib/util/handle-error'
+import { Region } from '@medusajs/medusa'
 import {
     useCart,
     useCreateLineItem,
     useDeleteLineItem,
     useUpdateLineItem,
-} from "medusa-react"
-import React, { useEffect, useState } from "react"
-import { useCartDropdown } from "./cart-dropdown-context"
+} from 'medusa-react'
+import React, { useEffect, useState } from 'react'
+import { useCartDropdown } from './cart-dropdown-context'
 
 interface VariantInfoProps {
     variantId: string
@@ -34,7 +34,7 @@ const StoreContext = React.createContext<StoreContext | null>(null)
 export const useStore = () => {
     const context = React.useContext(StoreContext)
     if (context === null) {
-        throw new Error("useStore must be used within a StoreProvider")
+        throw new Error('useStore must be used within a StoreProvider')
     }
     return context
 }
@@ -43,12 +43,15 @@ interface StoreProps {
     children: React.ReactNode
 }
 
-const IS_SERVER = typeof window === "undefined"
-const CART_KEY = "medusa_cart_id"
+const IS_SERVER = typeof window === 'undefined'
+const CART_KEY = 'medusa_cart_id'
+const REGION_KEY = 'medusa_region'
 
 export const StoreProvider = ({ children }: StoreProps) => {
     const { cart, setCart, createCart, updateCart } = useCart()
-    const [countryCode, setCountryCode] = useState<string | undefined>(undefined)
+    const [countryCode, setCountryCode] = useState<string | undefined>(
+        undefined
+    )
     const { timedOpen } = useCartDropdown()
     const addLineItem = useCreateLineItem(cart?.id!)
     const removeLineItem = useDeleteLineItem(cart?.id!)
@@ -57,7 +60,7 @@ export const StoreProvider = ({ children }: StoreProps) => {
     const storeRegion = (regionId: string, countryCode: string) => {
         if (!IS_SERVER) {
             localStorage.setItem(
-                "medusa_region",
+                REGION_KEY,
                 JSON.stringify({ regionId, countryCode })
             )
 
@@ -67,7 +70,7 @@ export const StoreProvider = ({ children }: StoreProps) => {
 
     useEffect(() => {
         if (!IS_SERVER) {
-            const storedRegion = localStorage.getItem("medusa_region")
+            const storedRegion = localStorage.getItem(REGION_KEY)
             if (storedRegion) {
                 const { countryCode } = JSON.parse(storedRegion)
                 setCountryCode(countryCode)
@@ -77,9 +80,12 @@ export const StoreProvider = ({ children }: StoreProps) => {
 
     const getRegion = () => {
         if (!IS_SERVER) {
-            const region = localStorage.getItem("medusa_region")
+            const region = localStorage.getItem(REGION_KEY)
             if (region) {
-                return JSON.parse(region) as { regionId: string; countryCode: string }
+                return JSON.parse(region) as {
+                    regionId: string
+                    countryCode: string
+                }
             }
         }
         return null
@@ -97,7 +103,7 @@ export const StoreProvider = ({ children }: StoreProps) => {
                     storeRegion(regionId, countryCode)
                 },
                 onError: (error) => {
-                    if (process.env.NODE_ENV === "development") {
+                    if (process.env.NODE_ENV === 'development') {
                         console.error(error)
                     }
                 },
@@ -105,19 +111,22 @@ export const StoreProvider = ({ children }: StoreProps) => {
         )
     }
 
-    const ensureRegion = (region: Region) => {
+    const ensureRegion = (region: Region, countryCode?: string | null) => {
         if (!IS_SERVER) {
-            const { regionId, countryCode } = getRegion() || {
-                regionId: region.id,
-                countryCode: region.countries[0].iso_2,
-            }
+            const { regionId, countryCode: defaultCountryCode } =
+                getRegion() || {
+                    regionId: region.id,
+                    countryCode: region.countries[0].iso_2,
+                }
+
+            const finalCountryCode = countryCode || defaultCountryCode
 
             if (regionId !== region.id) {
-                setRegion(region.id, countryCode)
+                setRegion(region.id, finalCountryCode)
             }
 
-            storeRegion(region.id, countryCode)
-            setCountryCode(countryCode)
+            storeRegion(region.id, finalCountryCode)
+            setCountryCode(finalCountryCode)
         }
     }
 
@@ -140,18 +149,26 @@ export const StoreProvider = ({ children }: StoreProps) => {
         }
     }
 
+    const deleteRegion = () => {
+        if (!IS_SERVER) {
+            localStorage.removeItem(REGION_KEY)
+        }
+    }
+
     const createNewCart = async (regionId?: string) => {
-        console.log("new cart", regionId)
         await createCart.mutateAsync(
             { region_id: regionId },
             {
                 onSuccess: ({ cart }) => {
                     setCart(cart)
                     storeCart(cart.id)
-                    ensureRegion(cart.region)
+                    ensureRegion(
+                        cart.region,
+                        cart.shipping_address?.country_code
+                    )
                 },
                 onError: (error) => {
-                    if (process.env.NODE_ENV === "development") {
+                    if (process.env.NODE_ENV === 'development') {
                         console.error(error)
                     }
                 },
@@ -172,10 +189,13 @@ export const StoreProvider = ({ children }: StoreProps) => {
                 onSuccess: ({ cart }) => {
                     setCart(cart)
                     storeCart(cart.id)
-                    ensureRegion(cart.region)
+                    ensureRegion(
+                        cart.region,
+                        cart.shipping_address?.country_code
+                    )
                 },
                 onError: (error) => {
-                    if (process.env.NODE_ENV === "development") {
+                    if (process.env.NODE_ENV === 'development') {
                         console.error(error)
                     }
                 },
@@ -200,7 +220,8 @@ export const StoreProvider = ({ children }: StoreProps) => {
 
                 if (!cartRes || cartRes.completed_at) {
                     deleteCart()
-                    await createNewCart(region?.regionId)
+                    deleteRegion()
+                    await createNewCart()
                     return
                 }
 

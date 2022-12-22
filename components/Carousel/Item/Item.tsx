@@ -1,45 +1,45 @@
-import { Flex } from "@chakra-ui/react";
-import React, { useContext, useState } from "react";
-import { Context, ContextType } from "../Provider";
+import { Flex } from '@chakra-ui/react'
+import React, { useContext, useState } from 'react'
+import { Context, ContextType } from '../Provider'
 
 interface ItemPropsType {
-    children: React.ReactNode;
-    index: number;
-    gap: number;
+    children: React.ReactNode
+    index: number
+    gap: number
 }
 
 const Item: React.FC<ItemPropsType> = ({ index, gap, children }) => {
-    const context = useContext(Context);
+    const context = useContext(Context)
 
-    const { positions } = context as ContextType;
+    const { positions } = context as ContextType
 
-    const [didUserTab, setDidUserTab] = useState(false);
+    const [didUserTab, setDidUserTab] = useState(false)
 
-    const handleFocus = () => context?.setTrackIsActive(true);
+    const handleFocus = () => context?.setTrackIsActive(true)
 
     const handleBlur = () => {
         didUserTab &&
             index + 1 === positions.length &&
-            context?.setTrackIsActive(false);
-        setDidUserTab(false);
-    };
+            context?.setTrackIsActive(false)
+        setDidUserTab(false)
+    }
 
-    const handleKeyUp: React.KeyboardEventHandler<HTMLDivElement> | undefined = (
-        event
-    ) => {
-        if (!context) return;
+    const handleKeyUp:
+        | React.KeyboardEventHandler<HTMLDivElement>
+        | undefined = (event) => {
+        if (!context) return
 
-        const { activeItem, constraint } = context;
+        const { activeItem, constraint } = context
         return (
-            event.key === "Tab" &&
+            event.key === 'Tab' &&
             !(activeItem === positions?.length - constraint) &&
             context?.setActiveItem(index)
-        );
-    };
+        )
+    }
 
     const handleKeyDown:
         | React.KeyboardEventHandler<HTMLDivElement>
-        | undefined = (event) => event.key === "Tab" && setDidUserTab(true);
+        | undefined = (event) => event.key === 'Tab' && setDidUserTab(true)
 
     return (
         <Flex
@@ -55,7 +55,7 @@ const Item: React.FC<ItemPropsType> = ({ index, gap, children }) => {
         >
             {children}
         </Flex>
-    );
-};
+    )
+}
 
-export default Item;
+export default Item

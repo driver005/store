@@ -1,16 +1,16 @@
-import { canBuy } from "@lib/util/can-buy"
-import { findCheapestPrice } from "@lib/util/prices"
-import isEqual from "lodash/isEqual"
-import { formatVariantPrice, useCart } from "medusa-react"
+import { canBuy } from '@lib/util/can-buy'
+import { findCheapestPrice } from '@lib/util/prices'
+import isEqual from 'lodash/isEqual'
+import { formatVariantPrice, useCart } from 'medusa-react'
 import React, {
     createContext,
     useContext,
     useEffect,
     useMemo,
     useState,
-} from "react"
-import { Product, Variant } from "types/medusa"
-import { useStore } from "./store-context"
+} from 'react'
+import { Product, Variant } from 'types/medusa'
+import { useStore } from './store-context'
 
 interface ProductContext {
     formattedPrice: string
@@ -104,7 +104,7 @@ export const ProductProvider = ({
             return findCheapestPrice(variants, cart.region)
         } else {
             // if no variant is selected, or we couldn't find a price for the region/currency
-            return "N/A"
+            return 'N/A'
         }
     }, [variant, variants, cart])
 
@@ -119,12 +119,13 @@ export const ProductProvider = ({
     }
 
     const addToCart = () => {
-        if (variant) {
+        if (inStock && variant) {
             addItem({
                 variantId: variant.id,
                 quantity,
             })
         }
+
     }
 
     const increaseQuantity = () => {
@@ -172,7 +173,7 @@ export const useProductActions = () => {
     const context = useContext(ProductActionContext)
     if (context === null) {
         throw new Error(
-            "useProductActionContext must be used within a ProductActionProvider"
+            'useProductActionContext must be used within a ProductActionProvider'
         )
     }
     return context

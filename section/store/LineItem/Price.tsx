@@ -1,30 +1,35 @@
-import { Flex, HStack, Text } from "@chakra-ui/react"
-import { getPercentageDiff } from "@lib/util/get-precentage-diff"
-import { Region } from "@medusajs/medusa"
-import clsx from "classnames"
-import { formatAmount } from "medusa-react"
-import { CalculatedVariant } from "types/medusa"
+import { Flex, HStack, Text } from '@chakra-ui/react'
+import { getPercentageDiff } from '@lib/util/get-precentage-diff'
+import { Region } from '@medusajs/medusa'
+import clsx from 'classnames'
+import { formatAmount } from 'medusa-react'
+import { CalculatedVariant } from 'types/medusa'
 
 type LineItemPriceProps = {
     variant: CalculatedVariant
     region: Region
     quantity: number
-    style?: "default" | "tight"
+    style?: 'default' | 'tight'
 }
 
 const LineItemPrice = ({
     variant,
     region,
     quantity,
-    style = "default",
+    style = 'default',
 }: LineItemPriceProps) => {
     const hasReducedPrice = variant.calculated_price < variant.original_price
 
     return (
-        <Flex flexDirection='column' fontSize='medium' color='green.700' textAlign='right'>
+        <Flex
+            flexDirection="column"
+            fontSize="medium"
+            color="green.700"
+            textAlign="right"
+        >
             <Text
-                as='span'
-                fontWeight='400'
+                as="span"
+                fontWeight="400"
                 className={`${hasReducedPrice && 'text-rose-600'}`}
             >
                 {formatAmount({
@@ -36,7 +41,7 @@ const LineItemPrice = ({
             {hasReducedPrice && (
                 <HStack>
                     <Text>
-                        {style === "default" && (
+                        {style === 'default' && (
                             <span className="text-gray-500">Original: </span>
                         )}
                         <span className="line-through">
@@ -47,7 +52,7 @@ const LineItemPrice = ({
                             })}
                         </span>
                     </Text>
-                    {style === "default" && (
+                    {style === 'default' && (
                         <span className="text-rose-600">
                             -
                             {getPercentageDiff(

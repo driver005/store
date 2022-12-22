@@ -1,16 +1,15 @@
-import React from 'react';
-import { chakra, Heading } from '@chakra-ui/react';
+import React from 'react'
+import { chakra, Heading } from '@chakra-ui/react'
 import opentype from 'opentype.js'
-import * as makerjs from 'makerjs';
+import * as makerjs from 'makerjs'
 import * as markerjs2 from 'markerjs2'
 // const stlSerializer = require('@jscad/stl-serializer');
 
 export class Text {
-
     // public fontList!: any;
     // private fileUpload!: HTMLInputElement;
     // private fileUploadRemove!: HTMLInputElement;
-    private customFont!: opentype.Font;
+    private customFont!: opentype.Font
     // private selectFamily!: HTMLSelectElement;
     // private selectVariant!: HTMLSelectElement;
     // private unionCheckbox!: HTMLInputElement;
@@ -21,7 +20,7 @@ export class Text {
     // private bezierAccuracy!: HTMLInputElement;
     // private selectUnits!: HTMLSelectElement;
     // private sizeInput!: HTMLInputElement;
-    private renderDiv!: HTMLDivElement;
+    private renderDiv!: HTMLDivElement
     // private outputTextarea!: HTMLTextAreaElement;
     // private copyToClipboardBtn!: HTMLButtonElement;
     // private downloadButton!: HTMLAnchorElement;
@@ -118,12 +117,10 @@ export class Text {
     //     this.renderCurrent();
     // }
 
-    constructor() {
-
-    }
+    constructor() {}
 
     init() {
-        this.renderDiv = this.$('#svg-render') as HTMLDivElement;
+        this.renderDiv = this.$('#svg-render') as HTMLDivElement
 
         // this.load()
 
@@ -147,7 +144,6 @@ export class Text {
     //     var fillInput = urlSearchParams.get('input-fill');
     //     var strokeInput = urlSearchParams.get('input-stroke');
     //     var strokeWidthInput = urlSearchParams.get('input-stroke-width');
-
 
     //     if (selectFamily !== "" && selectFamily !== null)
     //         this.selectFamily.value = selectFamily;
@@ -224,7 +220,7 @@ export class Text {
     // }
 
     $(selector: string) {
-        return document.querySelector(selector);
+        return document.querySelector(selector)
     }
 
     // addOption(select: HTMLSelectElement, optionText: string) {
@@ -265,21 +261,29 @@ export class Text {
         bezierAccuracy?: number
     ) {
         //generate the text using a font
-        var textModel = new makerjs.models.Text(font, text, size, union, false, bezierAccuracy, { kerning });
+        var textModel = new makerjs.models.Text(
+            font,
+            text,
+            size,
+            union,
+            false,
+            bezierAccuracy,
+            { kerning }
+        )
 
         if (separate) {
             for (var i in textModel.models) {
-                textModel.models[i].layer = i;
+                textModel.models[i].layer = i
             }
         }
 
         var svg = makerjs.exporter.toSVG(textModel, {
             fill: filled ? fill : undefined,
             stroke: stroke ? stroke : undefined,
-            strokeWidth: strokeWidth ? strokeWidth : undefined
-        });
+            strokeWidth: strokeWidth ? strokeWidth : undefined,
+        })
 
-        this.renderDiv.innerHTML = svg;
+        this.renderDiv.innerHTML = svg
         // this.renderDiv.id = 'text-svg'
     }
 
@@ -296,9 +300,24 @@ export class Text {
         strokeWidth: string,
         bezierAccuracy?: number
     ) {
-        opentype.load(`//fonts.gstatic.com/s/fredokaone/v13/k3kUo8kEI-tA1RRcTZGmTmHBA6aF8Bf_.ttf`, (err: string, font: any) => {
-            this.callMakerjs(font, text, size, union, filled, kerning, separate, units, fill, stroke, strokeWidth, bezierAccuracy);
-        });
+        opentype.load(
+            `//fonts.gstatic.com/s/fredokaone/v13/k3kUo8kEI-tA1RRcTZGmTmHBA6aF8Bf_.ttf`,
+            (err: string, font: any) => {
+                this.callMakerjs(
+                    font,
+                    text,
+                    size,
+                    union,
+                    filled,
+                    kerning,
+                    separate,
+                    units,
+                    fill,
+                    stroke,
+                    strokeWidth,
+                    bezierAccuracy
+                )
+            }
+        )
     }
 }
-

@@ -15,7 +15,9 @@ const ProductSliderControl: FC<ProductSliderControl> = ({
 }) => {
     const borderColor = `border-${color}-700`
     return (
-        <div className={cn(s.control, 'bg-white dark:bg-black dark:text-white')}>
+        <div
+            className={cn(s.control, 'bg-white dark:bg-black dark:text-white')}
+        >
             {/* <Button
             className={cn(s.leftControl, borderColor)}
             onClick={onPrev}

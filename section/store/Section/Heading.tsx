@@ -1,25 +1,23 @@
-import React, { FC } from "react";
-import { Flex, Icon, Stack } from "@chakra-ui/react";
-import { LinkHelike, LinkMetis } from "@components/index";
-import { BsArrowRight } from "react-icons/bs";
+import React, { FC } from 'react'
+import { Flex, Icon, Stack } from '@chakra-ui/react'
+import { LinkHelike, LinkMetis } from '@components/index'
+import { BsArrowRight } from 'react-icons/bs'
 
 interface HeadingProps {
-    storeLink: string;
-    storeLabel: string;
-    link: string;
-    label: string;
+    storeLink: string
+    storeLabel: string
+    link: string
+    label: string
 }
 
 export const Heading: FC<HeadingProps> = ({
     storeLink,
     storeLabel,
     link,
-    label
+    label,
 }) => {
     return (
-        <Stack
-            spacing={6}
-        >
+        <Stack spacing={6}>
             <LinkHelike size={50} link={storeLink} label={storeLabel} />
             <Flex>
                 <LinkMetis

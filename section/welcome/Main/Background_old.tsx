@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { Canvas } from "@react-three/fiber";
-import { Box, Image } from "@chakra-ui/react";
-import { Sketch, Distortion } from "@utils/index";
-import blue from "@assets/blue.jpg";
-import pink from "@assets/pink.jpg";
-import distortion from "@assets/distortion.jpg";
-import { useMountedState } from "react-use";
-
-
+import React, { useEffect, useState } from 'react'
+import { Canvas } from '@react-three/fiber'
+import { Box, Image } from '@chakra-ui/react'
+import { Sketch, Distortion } from '@utils/index'
+import blue from '@assets/blue.jpg'
+import pink from '@assets/pink.jpg'
+import distortion from '@assets/distortion.jpg'
+import { useMountedState } from 'react-use'
 
 const Background = () => {
     const [loaded, setLoaded] = useState(false)
-    const isMounted = useMountedState();
+    const isMounted = useMountedState()
     useEffect(() => {
-        if (document.getElementById('slider')?.children.length == 1 && loaded === false) {
+        if (
+            document.getElementById('slider')?.children.length == 1 &&
+            loaded === false
+        ) {
             //     new Sketch({
             //         duration: 1.5,
             //         debug: false,
@@ -37,7 +38,7 @@ const Background = () => {
             //             uniform vec4 resolution;
             //             varying vec2 vUv;
             //             varying vec4 vPosition;
-            //             //	Classic Perlin 3D Noise 
+            //             //	Classic Perlin 3D Noise
             //             //	by Stefan Gustavson
             //             //
             //             vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
@@ -198,43 +199,46 @@ const Background = () => {
     }, [loaded])
 
     useEffect(() => {
-        if (isMounted() && document.getElementById('slider')?.children.length == 1) {
+        if (
+            isMounted() &&
+            document.getElementById('slider')?.children.length == 1
+        ) {
             new Distortion({
-                dom: document.getElementById("slider")
-            });
+                dom: document.getElementById('slider'),
+            })
         }
     }, [isMounted])
-
 
     const images = `["${blue.src}","${pink.src}"]`
     const image = `${distortion.src}`
     return (
-        <Box id="content" w='full' h='full' position='absolute'>
+        <Box id="content" w="full" h="full" position="absolute">
             {/* <div id="slider" data-images={images} data-displacement="">
             </div> */}
-            <Box id="slider"
+            <Box
+                id="slider"
                 data-grid="607"
                 data-mouse="0.11"
                 data-strength="0.36"
                 data-relaxation="0.96"
                 data-image={image}
-                position='fixed'
-                top='0'
-                left='0'
-                zIndex='-1'
-                width='100%'
-                height='100%'
+                position="fixed"
+                top="0"
+                left="0"
+                zIndex="-1"
+                width="100%"
+                height="100%"
             >
                 <Image
                     src={`${distortion.src}`}
                     alt=""
-                    visibility='hidden'
-                    pointerEvents='none'
-                    position='absolute'
+                    visibility="hidden"
+                    pointerEvents="none"
+                    position="absolute"
                 />
             </Box>
         </Box>
-    );
+    )
 }
 
-export default Background;
+export default Background

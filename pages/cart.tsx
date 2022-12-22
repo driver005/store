@@ -1,19 +1,20 @@
-import { Wrapper } from "@components/index"
-import { Main } from "@section/cart"
-import { ReactElement } from "react"
-import { NextPageWithLayout } from "types/global"
+import CartTemplate from '@modules/cart/templates'
+import Head from '@modules/common/components/head'
+import Layout from '@modules/layout/templates'
+import { ReactElement } from 'react'
+import { NextPageWithLayout } from 'types/global'
 
 const Cart: NextPageWithLayout = () => {
     return (
         <>
-            {/* <Head title="Shopping Bag" description="View your shopping bag" /> */}
-            <Main />
+            <Head title="Shopping Bag" description="View your shopping bag" />
+            <CartTemplate />
         </>
     )
 }
 
 Cart.getLayout = (page: ReactElement) => {
-    return <Wrapper bgColor='gray.50'>{page}</Wrapper>
+    return <Layout>{page}</Layout>
 }
 
 export default Cart

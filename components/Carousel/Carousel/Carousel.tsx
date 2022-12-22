@@ -1,17 +1,17 @@
-import { useMediaQuery, useTheme } from "@chakra-ui/react";
-import React, { useContext, useEffect } from "react";
-import Item from "../Item";
-import { Context, ContextType } from "../Provider";
-import Slider from "../Slider";
-import Track from "../Track";
+import { useMediaQuery, useTheme } from '@chakra-ui/react'
+import React, { useContext, useEffect } from 'react'
+import Item from '../Item'
+import { Context, ContextType } from '../Provider'
+import Slider from '../Slider'
+import Track from '../Track'
 
 export interface CarouselPropTypes {
-    children: React.ReactNode[];
-    gap: number;
+    children: React.ReactNode[]
+    gap: number
 }
 
 export const Carousel: React.FC<CarouselPropTypes> = ({ children, gap }) => {
-    const context = useContext(Context);
+    const context = useContext(Context)
 
     const {
         setItemWidth,
@@ -20,43 +20,43 @@ export const Carousel: React.FC<CarouselPropTypes> = ({ children, gap }) => {
         setConstraint,
         itemWidth,
         setPositions,
-    } = context as ContextType;
+    } = context as ContextType
 
-    const { breakpoints } = useTheme();
+    const { breakpoints } = useTheme()
 
     useEffect(() => {
         const newPositions = children?.map(
             (_, index) => -Math.abs((itemWidth + gap) * index)
-        );
+        )
 
-        setPositions(newPositions);
-    }, [children, gap, itemWidth, setPositions]);
+        setPositions(newPositions)
+    }, [children, gap, itemWidth, setPositions])
 
     const [isBetweenBaseAndMd] = useMediaQuery(
         `(min-width: ${breakpoints?.base}) and (max-width: ${breakpoints?.md})`
-    );
+    )
 
     const [isBetweenMdAndXl] = useMediaQuery(
         `(min-width: ${breakpoints?.md}) and (max-width: ${breakpoints?.xl})`
-    );
+    )
 
-    const [isGreaterThanXL] = useMediaQuery(`(min-width: ${breakpoints?.xl})`);
+    const [isGreaterThanXL] = useMediaQuery(`(min-width: ${breakpoints?.xl})`)
 
     useEffect(() => {
         if (isBetweenBaseAndMd) {
-            setItemWidth(sliderWidth - gap);
-            setMultiplier(0.65);
-            setConstraint(1);
+            setItemWidth(sliderWidth - gap)
+            setMultiplier(0.65)
+            setConstraint(1)
         }
         if (isBetweenMdAndXl) {
-            setItemWidth(sliderWidth / 2 - gap);
-            setMultiplier(0.5);
-            setConstraint(2);
+            setItemWidth(sliderWidth / 2 - gap)
+            setMultiplier(0.5)
+            setConstraint(2)
         }
         if (isGreaterThanXL) {
-            setItemWidth(sliderWidth / 5 - gap);
-            setMultiplier(0.25);
-            setConstraint(5);
+            setItemWidth(sliderWidth / 5 - gap)
+            setMultiplier(0.25)
+            setConstraint(5)
         }
     }, [
         isBetweenBaseAndMd,
@@ -67,7 +67,7 @@ export const Carousel: React.FC<CarouselPropTypes> = ({ children, gap }) => {
         setItemWidth,
         setMultiplier,
         setConstraint,
-    ]);
+    ])
 
     return (
         <Slider gap={gap}>
@@ -79,5 +79,5 @@ export const Carousel: React.FC<CarouselPropTypes> = ({ children, gap }) => {
                 ))}
             </Track>
         </Slider>
-    );
-};
+    )
+}

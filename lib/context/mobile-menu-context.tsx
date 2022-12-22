@@ -1,6 +1,6 @@
-import useCurrentWidth from "@lib/hooks/use-current-width"
-import useDebounce from "@lib/hooks/use-debounce"
-import useToggleState from "@lib/hooks/use-toggle-state"
+import useCurrentWidth from '@lib/hooks/use-current-width'
+import useDebounce from '@lib/hooks/use-debounce'
+import useToggleState from '@lib/hooks/use-toggle-state'
 import {
     createContext,
     Dispatch,
@@ -9,9 +9,9 @@ import {
     useContext,
     useEffect,
     useState,
-} from "react"
+} from 'react'
 
-type ScreenType = "main" | "country" | "search"
+type ScreenType = 'main' | 'country' | 'search'
 
 interface MobileMenuContext {
     state: boolean
@@ -29,7 +29,7 @@ export const MobileMenuProvider = ({
     children: React.ReactNode
 }) => {
     const { state, close, open, toggle } = useToggleState()
-    const [screen, setScreen] = useState<ScreenType>("main")
+    const [screen, setScreen] = useState<ScreenType>('main')
 
     const windowWidth = useCurrentWidth()
 
@@ -39,7 +39,7 @@ export const MobileMenuProvider = ({
         close()
 
         setTimeout(() => {
-            setScreen("main")
+            setScreen('main')
         }, 500)
     }, [close])
 
@@ -49,7 +49,7 @@ export const MobileMenuProvider = ({
         }
     }, [debouncedWith, state, closeMenu])
 
-    useEffect(() => { }, [debouncedWith])
+    useEffect(() => {}, [debouncedWith])
 
     return (
         <MobileMenuContext.Provider
@@ -71,7 +71,7 @@ export const useMobileMenu = () => {
 
     if (context === null) {
         throw new Error(
-            "useCartDropdown must be used within a CartDropdownProvider"
+            'useCartDropdown must be used within a CartDropdownProvider'
         )
     }
 

@@ -1,35 +1,25 @@
-import { Box, Center, chakra, Flex } from '@chakra-ui/react'
-import { ProductView } from '@section/product'
-import { Card, Heading, Intro } from '@section/store'
-import { Wrapper } from "@components/index"
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import { ButtonMagnetic } from '@components/Buttons'
-import { Main } from '@section/category'
-import { Main as Welcome } from '@section/welcome'
+import Head from '@modules/common/components/head'
+import FeaturedProducts from '@modules/home/components/featured-products'
+import Hero from '@modules/home/components/hero'
+import Layout from '@modules/layout/templates'
+import { ReactElement } from 'react'
+import { NextPageWithLayout } from 'types/global'
 
-
-
-
-const Home: NextPage = () => {
+const Home: NextPageWithLayout = () => {
     return (
-        <Wrapper>
-            {/* <Intro /> */}
-            <Heading
-                margin={12}
+        <>
+            <Head
+                title="Home"
+                description="Shop all available models only at the ACME. Worldwide Shipping. Secure Payment."
             />
-            {/* <ProductView product={product} /> */}
-            {/* <Center h='100vh'>
-                <Card />
-                <Card />
-                <Card />
-                <Main />
-            </Center> */}
-            <Welcome />
-        </Wrapper>
+            <Hero />
+            <FeaturedProducts />
+        </>
     )
+}
+
+Home.getLayout = (page: ReactElement) => {
+    return <Layout>{page}</Layout>
 }
 
 export default Home

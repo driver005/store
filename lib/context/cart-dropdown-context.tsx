@@ -1,5 +1,5 @@
-import useToggleState from "@lib/hooks/use-toggle-state"
-import { createContext, useContext, useEffect, useState } from "react"
+import useToggleState from '@lib/hooks/use-toggle-state'
+import { createContext, useContext, useEffect, useState } from 'react'
 
 interface CartDropdownContext {
     state: boolean
@@ -61,7 +61,7 @@ export const useCartDropdown = () => {
 
     if (context === null) {
         throw new Error(
-            "useCartDropdown must be used within a CartDropdownProvider"
+            'useCartDropdown must be used within a CartDropdownProvider'
         )
     }
 

@@ -1,26 +1,14 @@
-import {
-    Flex,
-    Heading as ChakraHeading,
-    Icon
-} from "@chakra-ui/react";
-import { LinkMetis } from "@components/Links";
-import React, { FC } from "react";
-import { BsArrowRight } from "react-icons/bs";
+import { Flex, Heading as ChakraHeading, Icon } from '@chakra-ui/react'
+import { LinkMetis } from '@components/Links'
+import React, { FC } from 'react'
+import { BsArrowRight } from 'react-icons/bs'
 
-interface HeadingProps {
-}
+interface HeadingProps {}
 
 export const Heading: FC<HeadingProps> = () => {
     return (
-        <Flex
-            justifyContent='space-between'
-            alignItems='center'
-            w='full'
-        >
-            <ChakraHeading
-                as='h2'
-                size='lg'
-            >
+        <Flex justifyContent="space-between" alignItems="center" w="full">
+            <ChakraHeading as="h2" size="lg">
                 Shop by Categories
             </ChakraHeading>
             <LinkMetis

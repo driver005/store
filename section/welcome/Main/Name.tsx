@@ -1,8 +1,8 @@
 import { Box, Center, keyframes } from '@chakra-ui/react'
-import { Text } from '@utils/index';
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import { useMountedState } from 'react-use';
+import { Text } from '@utils/index'
+import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { useMountedState } from 'react-use'
 
 const animate = keyframes`
     0%{
@@ -21,16 +21,14 @@ const animate = keyframes`
 `
 
 interface NameProps {
-    label: string;
+    label: string
 }
 
-const Name: React.FC<NameProps> = ({
-    label,
-}) => {
+const Name: React.FC<NameProps> = ({ label }) => {
     const [playState, setPlayState] = useState('next')
     const [playing, setPlaying] = useState(false)
     const [loaded, setLoaded] = useState(false)
-    const isMounted = useMountedState();
+    const isMounted = useMountedState()
 
     useEffect(() => {
         if (document.getElementById('svg-render')?.children.length == 0) {
@@ -47,9 +45,8 @@ const Name: React.FC<NameProps> = ({
                 '#000',
                 '#000',
                 '0.25mm',
-                undefined,
+                undefined
             )
-
         }
         setLoaded(true)
     }, [label, loaded])
@@ -61,12 +58,11 @@ const Name: React.FC<NameProps> = ({
     }, [playState])
 
     return (
-        <Center w='full' h='full'>
-
+        <Center w="full" h="full">
             {/* <SvgText text='Aeeee' /> */}
             <Box
                 as={motion.div}
-                id='svg-render'
+                id="svg-render"
                 onAnimationStartCapture={() => setPlaying(true)}
                 onAnimationEndCapture={() => setPlaying(false)}
                 // onAnimationComplete={() => setPlaying(false)}
@@ -74,76 +70,75 @@ const Name: React.FC<NameProps> = ({
                 onMouseLeave={() => setPlayState('next')}
                 sx={{
                     '& path': {
-                        'animationName': `${playing ? animate : 'none'}`,
-                        'animationDuration': '1.2s',
-                        'animationTimingFunction': 'cubic-bezier(0.23,1,0.32,1)',
-                        'fill': 'white',
-                        'stroke': 'none'
+                        animationName: `${playing ? animate : 'none'}`,
+                        animationDuration: '1.2s',
+                        animationTimingFunction: 'cubic-bezier(0.23,1,0.32,1)',
+                        fill: 'white',
+                        stroke: 'none',
                     },
                     '& svg > g > path:nth-of-type(1)': {
-                        'animationDelay': '35ms'
+                        animationDelay: '35ms',
                     },
                     '& svg > g > path:nth-of-type(2)': {
-                        'animationDelay': '70ms'
+                        animationDelay: '70ms',
                     },
                     '& svg > g > path:nth-of-type(3)': {
-                        'animationDelay': '105ms'
+                        animationDelay: '105ms',
                     },
                     '& svg > g > path:nth-of-type(4)': {
-                        'animationDelay': '140ms'
+                        animationDelay: '140ms',
                     },
                     '& svg > g > path:nth-of-type(5)': {
-                        'animationDelay': '175ms'
+                        animationDelay: '175ms',
                     },
                     '& svg > g > path:nth-of-type(6)': {
-                        'animationDelay': '210ms'
+                        animationDelay: '210ms',
                     },
                     '& svg > g > path:nth-of-type(7)': {
-                        'animationDelay': '245ms'
+                        animationDelay: '245ms',
                     },
                     '& svg > g > path:nth-of-type(8)': {
-                        'animationDelay': '280ms'
+                        animationDelay: '280ms',
                     },
                     '& svg > g > path:nth-of-type(9)': {
-                        'animationDelay': '315ms'
+                        animationDelay: '315ms',
                     },
                     '& svg > g > path:nth-of-type(10)': {
-                        'animationDelay': '350ms'
+                        animationDelay: '350ms',
                     },
                     '& svg > g > path:nth-of-type(11)': {
-                        'animationDelay': '385ms'
+                        animationDelay: '385ms',
                     },
                     '& svg > g > path:nth-of-type(12)': {
-                        'animationDelay': '420ms'
+                        animationDelay: '420ms',
                     },
                     '& svg > g > path:nth-of-type(13)': {
-                        'animationDelay': '455ms'
+                        animationDelay: '455ms',
                     },
                     '& svg > g > path:nth-of-type(14)': {
-                        'animationDelay': '490ms'
+                        animationDelay: '490ms',
                     },
                     '& svg > g > path:nth-of-type(15)': {
-                        'animationDelay': '525ms'
+                        animationDelay: '525ms',
                     },
                     '& svg > g > path:nth-of-type(16)': {
-                        'animationDelay': '560ms'
+                        animationDelay: '560ms',
                     },
                     '& svg > g > path:nth-of-type(17)': {
-                        'animationDelay': '595ms'
+                        animationDelay: '595ms',
                     },
                     '& svg > g > path:nth-of-type(18)': {
-                        'animationDelay': '630ms'
+                        animationDelay: '630ms',
                     },
                     '& svg > g > path:nth-of-type(19)': {
-                        'animationDelay': '665ms'
+                        animationDelay: '665ms',
                     },
                     '& svg > g > path:nth-of-type(20)': {
-                        'animationDelay': '700ms'
+                        animationDelay: '700ms',
                     },
                 }}
             />
         </Center>
-
     )
 }
 

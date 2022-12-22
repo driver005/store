@@ -1,5 +1,8 @@
-import { SkeletonOrderConfirmedHeader, SkeletonOrderInformation, SkeletonOrderItems } from "@components/Skeleton"
-
+import {
+    SkeletonOrderConfirmedHeader,
+    SkeletonOrderInformation,
+    SkeletonOrderItems,
+} from '@components/Skeleton'
 
 const SkeletonOrderConfirmed = () => {
     return (

@@ -1,15 +1,15 @@
-import { fetchProductsList } from "@lib/data"
-import usePreviews from "@lib/hooks/use-previews"
-import getNumberOfSkeletons from "@lib/util/get-number-of-skeletons"
-import repeat from "@lib/util/repeat"
-import { StoreGetProductsParams } from "@medusajs/medusa"
-import { useCart } from "medusa-react"
-import { useEffect, useMemo } from "react"
-import { useInView } from "react-intersection-observer"
-import { useInfiniteQuery } from "react-query"
-import { Card } from "@section/store"
-import { useBreakpointValue, chakra, Box, Flex } from "@chakra-ui/react"
-import { SkeletonProductPreview } from "@components/Skeleton"
+import { fetchProductsList } from '@lib/data'
+import usePreviews from '@lib/hooks/use-previews'
+import getNumberOfSkeletons from '@lib/util/get-number-of-skeletons'
+import repeat from '@lib/util/repeat'
+import { StoreGetProductsParams } from '@medusajs/medusa'
+import { useCart } from 'medusa-react'
+import { useEffect, useMemo } from 'react'
+import { useInView } from 'react-intersection-observer'
+import { useInfiniteQuery } from 'react-query'
+import { Card } from '@section/store'
+import { useBreakpointValue, chakra, Box, Flex } from '@chakra-ui/react'
+import { SkeletonProductPreview } from '@components/Skeleton'
 
 type InfiniteProductsType = {
     params: StoreGetProductsParams
@@ -19,7 +19,7 @@ const InfiniteProducts = ({ params }: InfiniteProductsType) => {
     const column = useBreakpointValue({
         base: 'repeat(2, minmax(0, 1fr))',
         sm: 'repeat(3, minmax(0, 1fr))',
-        md: 'repeat(4, minmax(0, 1fr))'
+        md: 'repeat(4, minmax(0, 1fr))',
     })
 
     const { cart } = useCart()
@@ -60,13 +60,13 @@ const InfiniteProducts = ({ params }: InfiniteProductsType) => {
     }, [inView, hasNextPage])
 
     return (
-        <Box flex='1 1 0%' mx='12' className="flex-1 content-container">
+        <Box flex="1 1 0%" mx="12" className="flex-1 content-container">
             <chakra.ul
-                display='grid'
+                display="grid"
                 gridTemplateColumns={column}
-                columnGap='4'
-                rowGap='8'
-                flex='1 1 0%'
+                columnGap="4"
+                rowGap="8"
+                flex="1 1 0%"
             >
                 {previews.map((p) => (
                     <li key={p.id}>
@@ -88,11 +88,11 @@ const InfiniteProducts = ({ params }: InfiniteProductsType) => {
                     ))}
             </chakra.ul>
             <Flex
-                py='16'
-                justifyContent='center'
-                alignItems='center'
-                fontSize='400'
-                color='gray.700'
+                py="16"
+                justifyContent="center"
+                alignItems="center"
+                fontSize="400"
+                color="gray.700"
                 ref={ref}
             >
                 <span ref={ref}></span>

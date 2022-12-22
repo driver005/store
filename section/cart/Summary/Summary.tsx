@@ -1,10 +1,10 @@
-import { Button } from "@chakra-ui/react"
-import { Cart } from "@medusajs/medusa"
-import { CartTotals } from "@section/store"
-import Link from "next/link"
+import { Button } from '@chakra-ui/react'
+import { Cart } from '@medusajs/medusa'
+import { CartTotals } from '@section/store'
+import Link from 'next/link'
 
 type SummaryProps = {
-    cart: Omit<Cart, "refundable_amount" | "refunded_total">
+    cart: Omit<Cart, 'refundable_amount' | 'refunded_total'>
 }
 
 const Summary = ({ cart }: SummaryProps) => {

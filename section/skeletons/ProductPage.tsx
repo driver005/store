@@ -1,18 +1,23 @@
-import { SkeletonButton, SkeletonProductTabs } from "@components/Skeleton"
-import repeat from "@lib/util/repeat"
+import { SkeletonButton, SkeletonProductTabs } from '@components/Skeleton'
+import repeat from '@lib/util/repeat'
 
 const SkeletonProductPage = () => {
     return (
         <div>
-            <div className="content-container flex flex-col small:flex-row small:items-start py-6 relative">
+            <div className="content-container flex flex-col sm:flex-row sm:items-start py-6 relative">
                 <div className="flex flex-col gap-y-8 w-full">
                     <div className="flex items-start relative">
-                        <div className="hidden small:flex flex-col gap-y-4 sticky top-20">
+                        <div className="hidden sm:flex flex-col gap-y-4 sticky top-20">
                             {repeat(2).map((index) => {
-                                return <div key={index} className="h-14 w-12 bg-gray-100"></div>
+                                return (
+                                    <div
+                                        key={index}
+                                        className="h-14 w-12 bg-gray-100"
+                                    ></div>
+                                )
                             })}
                         </div>
-                        <div className="flex flex-col flex-1 small:mx-16 gap-y-4">
+                        <div className="flex flex-col flex-1 sm:mx-16 gap-y-4">
                             {repeat(2).map((index) => {
                                 return (
                                     <div
@@ -24,7 +29,7 @@ const SkeletonProductPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className="small:sticky small:top-20 w-full py-8 small:py-0 small:max-w-[344px] medium:max-w-[400px] flex flex-col gap-y-12">
+                <div className="sm:sticky sm:top-20 w-full py-8 sm:py-0 sm:max-w-[344px] medium:max-w-[400px] flex flex-col gap-y-12">
                     <div>
                         <div className="flex flex-col gap-y-12 lg:max-w-[500px] mx-auto">
                             <div>
@@ -34,7 +39,10 @@ const SkeletonProductPage = () => {
 
                                     <div className="flex flex-col gap-y-2 mt-4">
                                         {repeat(4).map((index) => (
-                                            <div key={index} className="h-4 w-62 bg-gray-100"></div>
+                                            <div
+                                                key={index}
+                                                className="h-4 w-62 bg-gray-100"
+                                            ></div>
                                         ))}
                                     </div>
 

@@ -1,12 +1,12 @@
-import { gsap } from 'gsap';
+import { gsap } from 'gsap'
 
 /**
  * Linear interpolation
  * @param {Number} a - first value to interpolate
- * @param {Number} b - second value to interpolate 
+ * @param {Number} b - second value to interpolate
  * @param {Number} n - amount to interpolate
  */
-const lerp = (a: number, b: number, n: number) => (1 - n) * a + n * b;
+const lerp = (a: number, b: number, n: number) => (1 - n) * a + n * b
 
 /**
  * Gets the cursor position
@@ -15,15 +15,15 @@ const lerp = (a: number, b: number, n: number) => (1 - n) * a + n * b;
 const getCursorPos = (ev: any) => {
     return {
         x: ev.clientX,
-        y: ev.clientY
-    };
-};
+        y: ev.clientY,
+    }
+}
 
 // Track the cursor position
-let cursor = { x: 0, y: 0 };
+let cursor = { x: 0, y: 0 }
 
 export const start = () => {
-    window.addEventListener('mousemove', ev => cursor = getCursorPos(ev));
+    window.addEventListener('mousemove', (ev) => (cursor = getCursorPos(ev)))
 }
 
 /**
@@ -31,8 +31,8 @@ export const start = () => {
  * A Cursor can have multiple elements/svgs
  */
 export class Cursor {
-    elements: any;
-    cursorElements: any = [];
+    elements: any
+    cursorElements: any = []
 
     /**
      * Constructor.
@@ -41,30 +41,34 @@ export class Cursor {
      */
     constructor(Dom_elems: NodeList, triggerSelector: string = 'a') {
         var that = this
-        window.addEventListener('load', function () {
-            that.init(Dom_elems, triggerSelector)
-        }, { capture: true, once: true });
-
+        window.addEventListener(
+            'load',
+            function () {
+                that.init(Dom_elems, triggerSelector)
+            },
+            { capture: true, once: true }
+        )
     }
 
-
     init(Dom_elems: NodeList, triggerSelector: string = 'a') {
-
-        this.elements = Dom_elems;
-
-        [...this.elements].forEach(el => this.cursorElements.push(new CursorElement(el)));
-        Array.from(document.querySelectorAll(triggerSelector)).forEach(link => {
-            link.addEventListener('mouseenter', () => this.enter());
-            link.addEventListener('mouseleave', () => this.leave());
-        });
-    };
+        this.elements = Dom_elems
+        ;[...this.elements].forEach((el) =>
+            this.cursorElements.push(new CursorElement(el))
+        )
+        Array.from(document.querySelectorAll(triggerSelector)).forEach(
+            (link) => {
+                link.addEventListener('mouseenter', () => this.enter())
+                link.addEventListener('mouseleave', () => this.leave())
+            }
+        )
+    }
 
     /**
      * Mouseenter event
      */
     enter() {
         for (const el of this.cursorElements) {
-            el.enter();
+            el.enter()
         }
     }
 
@@ -73,7 +77,7 @@ export class Cursor {
      */
     leave() {
         for (const el of this.cursorElements) {
-            el.leave();
+            el.leave()
         }
     }
 }
@@ -84,23 +88,23 @@ export class Cursor {
 class CursorElement {
     // elements
     // Main element (.cursor)
-    el: any;
+    el: any
     // Inner element (.cursor__inner)
-    inner: any;
+    inner: any
     // feTurbulence element
     feTurbulence: any
     // Scales value when entering an <a> element
-    radiusOnEnter: number = 30;
+    radiusOnEnter: number = 30
     // Opacity value when entering an <a> element
-    opacityOnEnter: number = 1;
+    opacityOnEnter: number = 1
     // radius
-    radius: number;
+    radius: number
     // Element style properties
     renderedStyles: any = {
-        // With interpolation, we can achieve a smooth animation effect when moving the cursor. 
-        // The "previous" and "current" values are the values that will interpolate. 
-        // The returned value will be one between these two (previous and current) at a specific increment. 
-        // The "amt" is the amount to interpolate. 
+        // With interpolation, we can achieve a smooth animation effect when moving the cursor.
+        // The "previous" and "current" values are the values that will interpolate.
+        // The returned value will be one between these two (previous and current) at a specific increment.
+        // The "amt" is the amount to interpolate.
         // As an example, the following formula calculates the x-axis translation value to apply to the cursor element:
         // this.renderedStyles.tx.previous = lerp(this.renderedStyles.tx.previous, this.renderedStyles.tx.current, this.renderedStyles.tx.amt);
 
@@ -112,55 +116,63 @@ class CursorElement {
         // Defaults are 1 for both properties
         //scale: {previous: 1, current: 1, amt: 0.2},
         radius: { previous: 20, current: 20, amt: 0.2 },
-        opacity: { previous: 1, current: 1, amt: 0.2 }
-    };
+        opacity: { previous: 1, current: 1, amt: 0.2 },
+    }
     // Element size and position
-    bounds;
+    bounds
     // SVG filter id
-    filterId: string = '#cursor-filter';
+    filterId: string = '#cursor-filter'
     // for the filter animation
-    primitiveValues = { turbulence: 0 };
-    filterTimeline: any;
+    primitiveValues = { turbulence: 0 }
+    filterTimeline: any
 
     /**
      * Constructor.
      */
     constructor(DOM_el: any) {
-        this.el = DOM_el;
-        this.inner = this.el.querySelector('.cursor__inner');
-        this.feTurbulence = document.querySelector(`${this.filterId} > feTurbulence`);
+        this.el = DOM_el
+        this.inner = this.el.querySelector('.cursor__inner')
+        this.feTurbulence = document.querySelector(
+            `${this.filterId} > feTurbulence`
+        )
 
-        this.createFilterTimeline();
+        this.createFilterTimeline()
 
         // Hide it initially
-        this.el.style.opacity = 0;
+        this.el.style.opacity = 0
 
         // Calculate size and position
-        this.bounds = this.el.getBoundingClientRect();
+        this.bounds = this.el.getBoundingClientRect()
 
         // Check if any options passed in data attributes
-        this.radiusOnEnter = this.el.dataset.radiusEnter || this.radiusOnEnter;
-        this.opacityOnEnter = this.el.dataset.opacityEnter || this.opacityOnEnter;
+        this.radiusOnEnter = this.el.dataset.radiusEnter || this.radiusOnEnter
+        this.opacityOnEnter =
+            this.el.dataset.opacityEnter || this.opacityOnEnter
         for (const key in this.renderedStyles) {
-            this.renderedStyles[key].amt = this.el.dataset.amt || this.renderedStyles[key].amt;
+            this.renderedStyles[key].amt =
+                this.el.dataset.amt || this.renderedStyles[key].amt
         }
 
-        this.radius = this.inner.getAttribute('r');
-        this.renderedStyles['radius'].previous = this.renderedStyles['radius'].current = this.radius;
+        this.radius = this.inner.getAttribute('r')
+        this.renderedStyles['radius'].previous = this.renderedStyles[
+            'radius'
+        ].current = this.radius
 
         // Show the element and start tracking its position as soon as the user moves the cursor.
         const onMouseMoveEv = () => {
             // Set up the initial values to be the same
-            this.renderedStyles.tx.previous = this.renderedStyles.tx.current = cursor.x - this.bounds.width / 2;
-            this.renderedStyles.ty.previous = this.renderedStyles.ty.previous = cursor.y - this.bounds.height / 2;
+            this.renderedStyles.tx.previous = this.renderedStyles.tx.current =
+                cursor.x - this.bounds.width / 2
+            this.renderedStyles.ty.previous = this.renderedStyles.ty.previous =
+                cursor.y - this.bounds.height / 2
             // Show it
-            this.el.style.opacity = 1;
+            this.el.style.opacity = 1
             // Start rAF loop
-            requestAnimationFrame(() => this.render());
+            requestAnimationFrame(() => this.render())
             // Remove the initial mousemove event
-            window.removeEventListener('mousemove', onMouseMoveEv);
-        };
-        window.addEventListener('mousemove', onMouseMoveEv);
+            window.removeEventListener('mousemove', onMouseMoveEv)
+        }
+        window.addEventListener('mousemove', onMouseMoveEv)
     }
 
     /**
@@ -169,10 +181,10 @@ class CursorElement {
      */
     enter() {
         console.log('enter')
-        this.renderedStyles['radius'].current = this.radiusOnEnter;
-        this.renderedStyles['opacity'].current = this.opacityOnEnter;
+        this.renderedStyles['radius'].current = this.radiusOnEnter
+        this.renderedStyles['opacity'].current = this.opacityOnEnter
 
-        this.filterTimeline.restart();
+        this.filterTimeline.restart()
     }
 
     /**
@@ -180,35 +192,38 @@ class CursorElement {
      * Reset scale and opacity.
      */
     leave() {
-
         console.log('leave')
-        this.renderedStyles['radius'].current = this.radius;
-        this.renderedStyles['opacity'].current = 1;
+        this.renderedStyles['radius'].current = this.radius
+        this.renderedStyles['opacity'].current = 1
 
-        this.filterTimeline.progress(1).kill();
+        this.filterTimeline.progress(1).kill()
     }
 
     createFilterTimeline() {
-        this.filterTimeline = gsap.timeline({
-            paused: true,
-            onStart: () => {
-                this.inner.style.filter = `url(${this.filterId}`;
-            },
-            onUpdate: () => {
-                this.feTurbulence.setAttribute('baseFrequency', this.primitiveValues.turbulence);
-            },
-            onComplete: () => {
-                this.inner.style.filter = 'none';
-            }
-        })
+        this.filterTimeline = gsap
+            .timeline({
+                paused: true,
+                onStart: () => {
+                    this.inner.style.filter = `url(${this.filterId}`
+                },
+                onUpdate: () => {
+                    this.feTurbulence.setAttribute(
+                        'baseFrequency',
+                        this.primitiveValues.turbulence
+                    )
+                },
+                onComplete: () => {
+                    this.inner.style.filter = 'none'
+                },
+            })
             .to(this.primitiveValues, {
                 duration: 3,
                 ease: 'none',
                 repeat: -1,
                 yoyo: true,
                 startAt: { turbulence: 0.15 },
-                turbulence: 0.13
-            });
+                turbulence: 0.13,
+            })
     }
 
     /**
@@ -216,20 +231,24 @@ class CursorElement {
      */
     render() {
         // New cursor positions
-        this.renderedStyles['tx'].current = cursor.x - this.bounds.width / 2;
-        this.renderedStyles['ty'].current = cursor.y - this.bounds.height / 2;
+        this.renderedStyles['tx'].current = cursor.x - this.bounds.width / 2
+        this.renderedStyles['ty'].current = cursor.y - this.bounds.height / 2
 
         // Interpolation
         for (const key in this.renderedStyles) {
-            this.renderedStyles[key].previous = lerp(this.renderedStyles[key].previous, this.renderedStyles[key].current, this.renderedStyles[key].amt);
+            this.renderedStyles[key].previous = lerp(
+                this.renderedStyles[key].previous,
+                this.renderedStyles[key].current,
+                this.renderedStyles[key].amt
+            )
         }
 
         // Apply interpolated values (smooth effect)
-        this.el.style.transform = `translateX(${(this.renderedStyles['tx'].previous)}px) translateY(${this.renderedStyles['ty'].previous}px)`;
-        this.inner.setAttribute('r', this.renderedStyles['radius'].previous);
-        this.el.style.opacity = this.renderedStyles['opacity'].previous;
+        this.el.style.transform = `translateX(${this.renderedStyles['tx'].previous}px) translateY(${this.renderedStyles['ty'].previous}px)`
+        this.inner.setAttribute('r', this.renderedStyles['radius'].previous)
+        this.el.style.opacity = this.renderedStyles['opacity'].previous
 
         // loop...
-        requestAnimationFrame(() => this.render());
+        requestAnimationFrame(() => this.render())
     }
 }

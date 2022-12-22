@@ -1,4 +1,4 @@
-export { default as Swatch } from './Swatch'
+// export { default as Swatch } from './Swatch'
 export { default as ImageGallery } from './Gallery'
 export { default as ProductView } from './View'
 export { default as ProductCard } from './ProductCard'
@@ -12,4 +12,3 @@ export { default as ProductReview } from './Review'
 export { default as RelatedProducts } from './Related'
 export { default as Thumbnail } from './Thumbnail'
 export { Stars, Comments } from './Review'
-

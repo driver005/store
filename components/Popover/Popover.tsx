@@ -5,20 +5,17 @@ import {
     PopoverContent,
     PopoverTrigger,
     Stack,
-    useDisclosure
-} from "@chakra-ui/react"
-import React from "react"
+    useDisclosure,
+} from '@chakra-ui/react'
+import React from 'react'
 import { IoIosArrowDown } from 'react-icons/io'
 
 interface PopoverProps {
-    label: string;
-    children: React.ReactNode;
+    label: string
+    children: React.ReactNode
 }
 
-const Popover: React.FC<PopoverProps> = ({
-    label,
-    children
-}) => {
+const Popover: React.FC<PopoverProps> = ({ label, children }) => {
     const { onOpen, onClose, isOpen } = useDisclosure()
     const firstFieldRef = React.useRef(null)
 
@@ -31,25 +28,19 @@ const Popover: React.FC<PopoverProps> = ({
         >
             <PopoverTrigger>
                 <Button
-                    variant='ghost'
+                    variant="ghost"
                     rightIcon={<IoIosArrowDown />}
                     sx={{
                         '& > span': {
-                            'color': `${isOpen ? 'gray.700' : 'gray.400'}`
+                            color: `${isOpen ? 'gray.700' : 'gray.400'}`,
                         },
                     }}
                 >
                     {label}
                 </Button>
             </PopoverTrigger>
-            <PopoverContent
-                w="full"
-                className='shadow-lg'
-            >
-                <PopoverBody
-                    px='0'
-                    py='1'
-                >
+            <PopoverContent w="full" className="shadow-lg">
+                <PopoverBody px="0" py="1">
                     {children}
                 </PopoverBody>
             </PopoverContent>

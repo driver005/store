@@ -1,18 +1,25 @@
-import { Box, BreadcrumbItem, BreadcrumbLink, Flex, HStack, Icon, Stack } from "@chakra-ui/react"
-import React, { useEffect, useState } from "react"
-import { Menu, Sort, Breadcrumb, Heading } from "@section/category"
-import { useRouter } from "next/router"
-import { FiChevronRight } from "react-icons/fi"
-import { capitalizeFirstLetter } from "@utils/index"
-import { useEffectOnce } from "react-use"
-import Link from "next/link"
-import { LinkMetis } from "@components/index"
-import { Card } from "@section/store"
-
+import {
+    Box,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    Flex,
+    HStack,
+    Icon,
+    Stack,
+} from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
+import { Menu, Sort, Breadcrumb, Heading } from '@section/category'
+import { useRouter } from 'next/router'
+import { FiChevronRight } from 'react-icons/fi'
+import { capitalizeFirstLetter } from '@utils/index'
+import { useEffectOnce } from 'react-use'
+import Link from 'next/link'
+import { LinkMetis } from '@components/index'
+import { Card } from '@section/store'
 
 const MenuItems = [
     {
-        name: "Bekleidung",
+        name: 'Bekleidung',
         href: 'clothing',
         level: 1,
         children: [
@@ -33,7 +40,7 @@ const MenuItems = [
                         level: 3,
                         children: null,
                     },
-                ]
+                ],
             },
             {
                 name: 'T-shirt',
@@ -52,8 +59,7 @@ const MenuItems = [
                         level: 3,
                         children: null,
                     },
-
-                ]
+                ],
             },
             {
                 name: 'Shorts',
@@ -72,71 +78,42 @@ const MenuItems = [
                         level: 3,
                         children: null,
                     },
-
-                ]
-            }
-        ]
-    }
+                ],
+            },
+        ],
+    },
 ]
 
+interface MainProps { }
 
-interface MainProps {
-}
-
-
-const Main: React.FC<MainProps> = ({
-
-}) => {
+const Main: React.FC<MainProps> = ({ }) => {
     const router = useRouter()
 
     return (
-        <Box
-            w='100%'
-            h='100%'
-            mx='auto'
-            maxW='1260px'
-        >
-            <Breadcrumb
-                items={MenuItems}
-            />
+        <Box w="100%" h="100%" mx="auto" maxW="1260px">
+            <Breadcrumb items={MenuItems} />
             <Flex
-                w='100%'
-                justifyContent='space-between'
-                alignItems='center'
+                w="100%"
+                justifyContent="space-between"
+                alignItems="center"
                 pb={6}
             >
-                <Heading
-                    items={MenuItems}
-                />
+                <Heading items={MenuItems} />
                 <Sort />
             </Flex>
 
-            <Stack
-                w='100%'
-                isInline
-            >
-                <Box
-                    w='20%'
-                    h='100%'
-                >
-                    <Menu
-                        items={MenuItems}
-                    />
+            <Stack w="100%" isInline>
+                <Box w="20%" h="100%">
+                    <Menu items={MenuItems} />
                 </Box>
-                <Box
-                    w='80%'
-                    h='100%'
-                >
-                    <Flex
-                        flexWrap='wrap'
-                        maxW='100%'
-                    >
+                <Box w="80%" h="100%">
+                    <Flex flexWrap="wrap" maxW="100%">
+                        {/* <Card />
                         <Card />
                         <Card />
                         <Card />
                         <Card />
-                        <Card />
-                        <Card />
+                        <Card /> */}
                     </Flex>
                 </Box>
             </Stack>

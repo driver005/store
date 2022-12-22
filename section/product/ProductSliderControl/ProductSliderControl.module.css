@@ -1,29 +1,29 @@
 .control {
-  @apply absolute bottom-10 right-10 flex flex-row
+    @apply absolute bottom-10 right-10 flex flex-row
   z-30 shadow-xl select-none rounded-md;
-  height: 48px;
+    height: 48px;
 }
 
 .leftControl,
 .rightControl {
-  @apply px-9 cursor-pointer border  rounded-l-md;
-  transition: background-color 0.2s ease;
+    @apply px-9 cursor-pointer border  rounded-l-md;
+    transition: background-color 0.2s ease;
 }
 
 .leftControl:hover,
 .rightControl:hover {
-  background-color: #25222a78;
+    background-color: #25222a78;
 }
 
 .leftControl:focus,
 .rightControl:focus {
-  @apply outline-none;
+    @apply outline-none;
 }
 
 .rightControl {
-  @apply border rounded-none rounded-r-md;
+    @apply border rounded-none rounded-r-md;
 }
 
 .leftControl {
-  margin-right: -1px;
+    margin-right: -1px;
 }

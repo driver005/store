@@ -77,24 +77,22 @@ const ProductSlider: React.FC<ProductSliderProps> = ({
     const onPrev = React.useCallback(() => slider.current?.prev(), [slider])
     const onNext = React.useCallback(() => slider.current?.next(), [slider])
     return (
-
-
         <Flex
-            position='relative'
-            w='full'
-            h='full'
-            userSelect='none'
-            justifyContent='center'
-            overflow='hidden'
+            position="relative"
+            w="full"
+            h="full"
+            userSelect="none"
+            justifyContent="center"
+            overflow="hidden"
             ref={sliderContainerRef}
         >
-            <Box width='10%'>
+            <Box width="10%">
                 <Flex
-                    w='full'
-                    h='full'
-                    flexDirection='column'
-                    boxSizing='content-box'
-                    whiteSpace='nowrap'
+                    w="full"
+                    h="full"
+                    flexDirection="column"
+                    boxSizing="content-box"
+                    whiteSpace="nowrap"
                     ref={thumbsContainerRef}
                     css={{
                         '&::-webkit-scrollbar': {
@@ -110,9 +108,14 @@ const ProductSlider: React.FC<ProductSliderProps> = ({
                                     props: {
                                         ...child.props,
 
-                                        className: cn(child.props.className, s.thumb, {
-                                            [s.selected]: currentSlide === idx,
-                                        }),
+                                        className: cn(
+                                            child.props.className,
+                                            s.thumb,
+                                            {
+                                                [s.selected]:
+                                                    currentSlide === idx,
+                                            }
+                                        ),
                                         id: `thumb-${idx}`,
                                         onClick: () => {
                                             slider.current?.moveToIdx(idx)
@@ -126,19 +129,20 @@ const ProductSlider: React.FC<ProductSliderProps> = ({
                 {/* <div className={s.album} >
                     
                 </div> */}
-
             </Box>
-            <Box width='600px'>
+            <Box width="600px">
                 <Box
                     opacity={isMounted ? 1 : 0}
-                    position='relative'
-                    h='full'
-                    ml='2'
-                    rounded='lg'
+                    position="relative"
+                    h="full"
+                    ml="2"
+                    rounded="lg"
                     ref={ref}
                     className={cn(s.slider, 'keen-slider')}
                 >
-                    {slider && <ProductSliderControl onPrev={onPrev} onNext={onNext} />}
+                    {slider && (
+                        <ProductSliderControl onPrev={onPrev} onNext={onNext} />
+                    )}
                     {Children.map(children, (child) => {
                         // Add the keen-slider__slide className to children
                         if (isValidElement(child)) {
@@ -146,8 +150,11 @@ const ProductSlider: React.FC<ProductSliderProps> = ({
                                 ...child,
                                 props: {
                                     ...child.props,
-                                    className: `${child.props.className ? `${child.props.className} ` : ''
-                                        }keen-slider__slide`,
+                                    className: `${
+                                        child.props.className
+                                            ? `${child.props.className} `
+                                            : ''
+                                    }keen-slider__slide`,
                                 },
                             }
                         }
@@ -156,8 +163,6 @@ const ProductSlider: React.FC<ProductSliderProps> = ({
                 </Box>
             </Box>
         </Flex>
-
-
     )
 }
 

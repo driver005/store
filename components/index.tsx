@@ -9,6 +9,6 @@ export {
     ButtonCalypso,
     ButtonFenrir,
     ButtonMagnetic,
-    ButtonTextCircle
+    ButtonTextCircle,
 } from './Buttons'
 export { default as Wrapper } from './Wrapper'

@@ -1,15 +1,9 @@
-export {
-    Back,
-    Bar,
-    Content,
-    Cover,
-    default as Heading
-} from './Heading'
+export { Back, Bar, Content, Cover, default as Heading } from './Heading'
 export {
     Section,
     Divider,
     Products,
-    Heading as SectionHeading
+    Heading as SectionHeading,
 } from './Section'
 export { CategoryGrid, CategoryColumn } from './Category'
 export { default as Card } from './Card'

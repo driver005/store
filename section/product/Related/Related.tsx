@@ -1,15 +1,15 @@
-import { chakra, Text, useBreakpointValue } from "@chakra-ui/react"
-import { ButtonBestia } from "@components/Buttons"
-import { SkeletonProductPreview } from "@components/Skeleton"
-import { fetchProductsList } from "@lib/data"
-import usePreviews from "@lib/hooks/use-previews"
-import getNumberOfSkeletons from "@lib/util/get-number-of-skeletons"
-import repeat from "@lib/util/repeat"
-import { Product, StoreGetProductsParams } from "@medusajs/medusa"
-import { Card } from "@section/store"
-import { useCart } from "medusa-react"
-import { useMemo } from "react"
-import { useInfiniteQuery } from "react-query"
+import { chakra, Text, useBreakpointValue } from '@chakra-ui/react'
+import { ButtonBestia } from '@components/Buttons'
+import { SkeletonProductPreview } from '@components/Skeleton'
+import { fetchProductsList } from '@lib/data'
+import usePreviews from '@lib/hooks/use-previews'
+import getNumberOfSkeletons from '@lib/util/get-number-of-skeletons'
+import repeat from '@lib/util/repeat'
+import { Product, StoreGetProductsParams } from '@medusajs/medusa'
+import { Card } from '@section/store'
+import { useCart } from 'medusa-react'
+import { useMemo } from 'react'
+import { useInfiniteQuery } from 'react-query'
 
 type RelatedProductsProps = {
     product: Product
@@ -19,7 +19,7 @@ const RelatedProducts = ({ product }: RelatedProductsProps) => {
     const column = useBreakpointValue({
         base: 'repeat(2, minmax(0, 1fr));',
         sm: 'repeat(3, minmax(0, 1fr));',
-        md: 'repeat(4, minmax(0, 1fr));'
+        md: 'repeat(4, minmax(0, 1fr));',
     })
 
     const { cart } = useCart()
@@ -36,6 +36,7 @@ const RelatedProducts = ({ product }: RelatedProductsProps) => {
         }
 
         if (product.type) {
+            //@ts-ignore
             params.type = product.type.id
         }
 
@@ -62,18 +63,18 @@ const RelatedProducts = ({ product }: RelatedProductsProps) => {
     return (
         <div>
             <div className="flex flex-col items-center text-center mb-16">
-                <Text as='span' color='green.600' mb='6'>
+                <Text as="span" color="green.600" mb="6">
                     Related products
                 </Text>
-                <Text maxW='lg' fontSize='3xl'>
+                <Text maxW="lg" fontSize="3xl">
                     You might also want to check out these products.
                 </Text>
             </div>
             <chakra.ul
-                display='grid'
+                display="grid"
                 gridTemplateColumns={column}
-                columnGap='4'
-                rowGap='8'
+                columnGap="4"
+                rowGap="8"
             >
                 {previews.map((p) => (
                     <li key={p.id}>
@@ -100,7 +101,7 @@ const RelatedProducts = ({ product }: RelatedProductsProps) => {
                         loaded={isLoading}
                         onClick={() => fetchNextPage()}
                         className="w-72"
-                        label='Load more'
+                        label="Load more"
                     />
                 </div>
             )}

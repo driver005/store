@@ -1,17 +1,21 @@
-import { Box, Flex, Heading, chakra, useBreakpointValue, Checkbox } from "@chakra-ui/react"
-import { StoreGetProductsParams } from "@medusajs/medusa"
-import { useCollections } from "medusa-react"
-import { ChangeEvent } from "react"
+import {
+    Box,
+    Flex,
+    Heading,
+    chakra,
+    useBreakpointValue,
+    Checkbox,
+} from '@chakra-ui/react'
+import { StoreGetProductsParams } from '@medusajs/medusa'
+import { useCollections } from 'medusa-react'
+import { ChangeEvent } from 'react'
 
 type ListProps = {
     refinementList: StoreGetProductsParams
     setRefinementList: (refinementList: StoreGetProductsParams) => void
 }
 
-const List = ({
-    refinementList,
-    setRefinementList,
-}: ListProps) => {
+const List = ({ refinementList, setRefinementList }: ListProps) => {
     const { collections, isLoading } = useCollections()
 
     const handleCollectionChange = (
@@ -52,23 +56,32 @@ const List = ({
     const rowGap2 = useBreakpointValue({ sm: '2' })
     const flexDirection = useBreakpointValue({ sm: 'column' })
     const display = useBreakpointValue({ base: 'flex', sm: 'grid' })
-    const gridTemplateColumns = useBreakpointValue({ sm: 'repeat(2, minmax(0, 1fr))' })
+    const gridTemplateColumns = useBreakpointValue({
+        sm: 'repeat(2, minmax(0, 1fr))',
+    })
 
     return (
         <Box>
-            <Box px='8' py='4' pr={pr} pl={pl} minW={minW}>
+            <Box px="8" py="4" pr={pr} pl={pl} minW={minW}>
                 <Flex
-                    columnGap='3'
-                    flexDirection={flexDirection}
-                    rowGap={rowGap3}>
-                    <Heading as='h3' fontSize='medium' fontWeight='semibold' color='gray.900' mb='4'>
+                    columnGap="3"
+                    flexDirection={flexDirection as any}
+                    rowGap={rowGap3}
+                >
+                    <Heading
+                        as="h3"
+                        fontSize="medium"
+                        fontWeight="semibold"
+                        color="gray.900"
+                        mb="4"
+                    >
                         Collections
                     </Heading>
                     <chakra.ul
                         display={display}
-                        fontWeight='400'
-                        alignItems='center'
-                        columnGap='4'
+                        fontWeight="400"
+                        alignItems="center"
+                        columnGap="4"
                         gridTemplateColumns={gridTemplateColumns}
                         rowGap={rowGap2}
                     >
@@ -78,7 +91,9 @@ const List = ({
                                     defaultChecked={refinementList.collection_id?.includes(
                                         c.id
                                     )}
-                                    onChange={(e) => handleCollectionChange(e, c.id)}
+                                    onChange={(e) =>
+                                        handleCollectionChange(e, c.id)
+                                    }
                                 >
                                     {c.title}
                                 </Checkbox>

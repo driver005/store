@@ -1,25 +1,28 @@
-import { Wrapper } from "@components/index"
-import { medusaClient } from "@lib/config"
-import { IS_BROWSER } from "@lib/constants"
-import { getCollectionIds } from "@lib/util/get-collection-ids"
-import { Main } from "@section/collections"
-import { SkeletonCollectionPage } from "@section/skeletons"
-import { GetStaticPaths, GetStaticProps } from "next"
-import { useRouter } from "next/router"
-import { ParsedUrlQuery } from "querystring"
-import { ReactElement } from "react"
-import { dehydrate, QueryClient, useQuery } from "react-query"
-import { NextPageWithLayout, PrefetchedPageProps } from "../../types/global"
+import { medusaClient } from '@lib/config'
+import { IS_BROWSER } from '@lib/constants'
+import { getCollectionIds } from '@lib/util/get-collection-ids'
+import CollectionTemplate from '@modules/collections/templates'
+import Head from '@modules/common/components/head'
+import Layout from '@modules/layout/templates'
+import SkeletonCollectionPage from '@modules/skeletons/templates/skeleton-collection-page'
+import { GetStaticPaths, GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
+import { ParsedUrlQuery } from 'querystring'
+import { ReactElement } from 'react'
+import { dehydrate, QueryClient, useQuery } from 'react-query'
+import { NextPageWithLayout, PrefetchedPageProps } from '../../types/global'
 
 interface Params extends ParsedUrlQuery {
     id: string
 }
 
 const fetchCollection = async (id: string) => {
-    return await medusaClient.collections.retrieve(id).then(({ collection }) => ({
-        id: collection.id,
-        title: collection.title,
-    }))
+    return await medusaClient.collections
+        .retrieve(id)
+        .then(({ collection }) => ({
+            id: collection.id,
+            title: collection.title,
+        }))
 }
 
 export const fetchCollectionProducts = async ({
@@ -48,23 +51,23 @@ const CollectionPage: NextPageWithLayout<PrefetchedPageProps> = ({
     notFound,
 }) => {
     const { query, isFallback, replace } = useRouter()
-    const id = typeof query.id === "string" ? query.id : ""
+    const id = typeof query.id === 'string' ? query.id : ''
 
     const { data, isError, isSuccess, isLoading } = useQuery(
-        ["get_collection", id],
+        ['get_collection', id],
         () => fetchCollection(id)
     )
 
     if (notFound) {
         if (IS_BROWSER) {
-            replace("/404")
+            replace('/404')
         }
 
         return <SkeletonCollectionPage />
     }
 
     if (isError) {
-        replace("/404")
+        replace('/404')
     }
 
     if (isFallback || isLoading || !data) {
@@ -74,8 +77,11 @@ const CollectionPage: NextPageWithLayout<PrefetchedPageProps> = ({
     if (isSuccess) {
         return (
             <>
-                {/* <Head title={data.title} description={`${data.title} collection`} /> */}
-                <Main collection={data} />
+                <Head
+                    title={data.title}
+                    description={`${data.title} collection`}
+                />
+                <CollectionTemplate collection={data} />
             </>
         )
     }
@@ -84,7 +90,7 @@ const CollectionPage: NextPageWithLayout<PrefetchedPageProps> = ({
 }
 
 CollectionPage.getLayout = (page: ReactElement) => {
-    return <Wrapper>{page}</Wrapper>
+    return <Layout>{page}</Layout>
 }
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
@@ -100,12 +106,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const queryClient = new QueryClient()
     const id = context.params?.id as string
 
-    await queryClient.prefetchQuery(["get_collection", id], () =>
+    await queryClient.prefetchQuery(['get_collection', id], () =>
         fetchCollection(id)
     )
 
     await queryClient.prefetchInfiniteQuery(
-        ["get_collection_products", id],
+        ['get_collection_products', id],
         ({ pageParam }) => fetchCollectionProducts({ pageParam, id }),
         {
             getNextPageParam: (lastPage) => lastPage.nextPage,

@@ -12,24 +12,28 @@ interface ProductViewProps {
     quickview?: boolean
 }
 
-const ProductView: FC<ProductViewProps> = ({ product, productData, relatedProducts, quickview = false }) => {
+const ProductView: FC<ProductViewProps> = ({
+    product,
+    productData,
+    relatedProducts,
+    quickview = false,
+}) => {
     const info = useRef<HTMLDivElement>(null)
-    const inView = useIntersection(info, "0px")
-    const marginY = useBreakpointValue({ base: '16', lg: '32' });
-    const paddingX = useBreakpointValue({ base: '6', lg: '8' });
+    const inView = useIntersection(info, '0px')
+    const marginY = useBreakpointValue({ base: '16', lg: '32' })
+    const paddingX = useBreakpointValue({ base: '6', lg: '8' })
     return (
         <ProductProvider product={product}>
-            <Box w='full' maxW='none'>
-                <SimpleGrid spacing='0.5' gridTemplateColumns='repeat(12, minmax(0, 1fr))'>
-                    <ImageGallery
-                        product={product}
-                    />
-                    <ProductSidebar
-                        product={product}
-                    />
+            <Box w="full" maxW="none">
+                <SimpleGrid
+                    spacing="0.5"
+                    gridTemplateColumns="repeat(12, minmax(0, 1fr))"
+                >
+                    <ImageGallery product={product} />
+                    <ProductSidebar product={product} />
                 </SimpleGrid>
             </Box>
-            <Box ref={info} my={marginY} px={paddingX} width='full'>
+            <Box ref={info} my={marginY} px={paddingX} width="full">
                 <RelatedProducts product={product} />
             </Box>
             <NextSeo

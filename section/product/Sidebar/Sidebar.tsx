@@ -1,11 +1,18 @@
 import { FC, useEffect, useMemo, useState } from 'react'
-import { ProductDescription, ProductOption, ProductInfo, ProductTag, ProductReview, Stars, Comments } from '@section/product'
+import {
+    ProductDescription,
+    ProductOption,
+    ProductInfo,
+    ProductTag,
+    ProductReview,
+    Stars,
+    Comments,
+} from '@section/product'
 import { useForm } from 'react-hook-form'
 import { Box, Button, Flex } from '@chakra-ui/react'
 import { ButtonPay } from '@components/index'
 import { useProductActions } from '@lib/context/product-context'
 import useProductPrice from '@lib/hooks/use-product-price'
-
 
 interface ProductSidebarProps {
     product: any
@@ -30,18 +37,18 @@ const ProductSidebar: FC<ProductSidebarProps> = ({ product }) => {
         formState: { errors, isSubmitting },
         control,
         getValues,
-        watch
+        watch,
     } = useForm()
 
     return (
         <Flex
-            w='full'
-            h='full'
-            maxW='80rem'
-            flexDirection='column'
-            px='6'
-            pb='6'
-            gridColumn='span 4 / span 4'
+            w="full"
+            h="full"
+            maxW="80rem"
+            flexDirection="column"
+            px="6"
+            pb="6"
+            gridColumn="span 4 / span 4"
         >
             <ProductTag
                 name={product.title}
@@ -49,32 +56,30 @@ const ProductSidebar: FC<ProductSidebarProps> = ({ product }) => {
                 price={selectedPrice}
                 collection={product.collection}
             />
-            <Box mb='8'>
-                {product.variants.length > 1 && product.options.map((option: any) => (
-                    <ProductOption
-                        key={option.id}
-                        control={control}
-                        option={option}
-                        updateOption={updateOptions}
-                        current={options[option.id]}
-                        title={option.title}
-                    />
-                ))}
+            <Box mb="8">
+                {product.variants.length > 1 &&
+                    product.options.map((option: any) => (
+                        <ProductOption
+                            key={option.id}
+                            control={control}
+                            option={option}
+                            updateOption={updateOptions}
+                            current={options[option.id]}
+                            title={option.title}
+                        />
+                    ))}
             </Box>
 
-            <Box mb='10'>
+            <Box mb="10">
                 <ButtonPay
-                    label={!inStock ? "Out of stock" : "Add to cart"}
-                    className='shadow-xl shadow-gray-400/50'
+                    label={!inStock ? 'Out of stock' : 'Add to cart'}
+                    className="shadow-xl shadow-gray-400/50"
                     onClick={addToCart}
                 />
             </Box>
             <ProductInfo thirdsPartyStore={true} />
 
-            <ProductDescription
-                product={product}
-                title={"Details"}
-            />
+            <ProductDescription product={product} title={'Details'} />
 
             {/* <Box mb='10'>
                 <Stars
@@ -93,8 +98,6 @@ const ProductSidebar: FC<ProductSidebarProps> = ({ product }) => {
                 open={open}
                 setOpen={setOpen}
             /> */}
-
-
         </Flex>
     )
 }

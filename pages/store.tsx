@@ -1,38 +1,28 @@
-import { Box, Flex, useBreakpointValue } from "@chakra-ui/react"
-import { Wrapper } from "@components/index"
-import { StoreGetProductsParams } from "@medusajs/medusa"
-import { List } from "@section/all"
-import { InfiniteProducts } from "@section/store"
-import { useState } from "react"
-import { NextPageWithLayout } from "types/global"
+import { StoreGetProductsParams } from '@medusajs/medusa'
+import Head from '@modules/common/components/head'
+import Layout from '@modules/layout/templates'
+import InfiniteProducts from '@modules/products/components/infinite-products'
+import RefinementList from '@modules/store/components/refinement-list'
+import { useState } from 'react'
+import { NextPageWithLayout } from 'types/global'
 
 const Store: NextPageWithLayout = () => {
     const [params, setParams] = useState<StoreGetProductsParams>({})
 
-    const direction = useBreakpointValue({
-        base: 'column',
-        sm: 'row',
-    })
-
-    const item = useBreakpointValue({
-        sm: 'start',
-    })
-
     return (
         <>
-            {/* <Head title="Store" description="Explore all of our products." /> */}
-            <Flex
-                flexDirection={direction}
-                py='6'
-                alignItems={item}
-            >
-                <List refinementList={params} setRefinementList={setParams} />
+            <Head title="Store" description="Explore all of our products." />
+            <div className="flex flex-col sm:flex-row sm:items-start py-6">
+                <RefinementList
+                    refinementList={params}
+                    setRefinementList={setParams}
+                />
                 <InfiniteProducts params={params} />
-            </Flex>
+            </div>
         </>
     )
 }
 
-Store.getLayout = (page) => <Wrapper>{page}</Wrapper>
+Store.getLayout = (page) => <Layout>{page}</Layout>
 
 export default Store

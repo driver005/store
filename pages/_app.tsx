@@ -1,14 +1,18 @@
-import '../styles/globals.css'
-import 'keen-slider/keen-slider.min.css'
-
-import { ChakraProvider } from '@chakra-ui/react'
-import { CartProvider, MedusaProvider } from 'medusa-react'
+import { ChakraBaseProvider } from '@chakra-ui/react'
 import { MEDUSA_BACKEND_URL, queryClient } from '@lib/config'
-import { StoreProvider } from '@lib/context/store-context'
+import { AccountProvider } from '@lib/context/account-context'
 import { CartDropdownProvider } from '@lib/context/cart-dropdown-context'
+import { MobileMenuProvider } from '@lib/context/mobile-menu-context'
+import { StoreProvider } from '@lib/context/store-context'
+import { CartProvider, MedusaProvider } from 'medusa-react'
+import { Hydrate } from 'react-query'
+import 'styles/globals.css'
 import { AppPropsWithLayout } from 'types/global'
 
-function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+function App({
+    Component,
+    pageProps,
+}: AppPropsWithLayout<{ dehydratedState?: unknown }>) {
     const getLayout = Component.getLayout ?? ((page) => page)
 
     return (
@@ -18,16 +22,23 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
                 client: queryClient,
             }}
         >
-            <CartDropdownProvider>
-                <CartProvider>
-                    <StoreProvider>
-                        <ChakraProvider>
-                            {getLayout(<Component {...pageProps} />)}
-                        </ChakraProvider>
-                    </StoreProvider>
-                </CartProvider>
-            </CartDropdownProvider>
+            <Hydrate state={pageProps.dehydratedState}>
+                <ChakraBaseProvider>
+                    <CartDropdownProvider>
+                        <MobileMenuProvider>
+                            <CartProvider>
+                                <StoreProvider>
+                                    <AccountProvider>
+                                        {getLayout(<Component {...pageProps} />)}
+                                    </AccountProvider>
+                                </StoreProvider>
+                            </CartProvider>
+                        </MobileMenuProvider>
+                    </CartDropdownProvider>
+                </ChakraBaseProvider>
+            </Hydrate>
         </MedusaProvider>
     )
 }
-export default MyApp
+
+export default App

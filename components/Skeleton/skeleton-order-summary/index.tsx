@@ -1,4 +1,4 @@
-import { SkeletonButton, SkeletonCartTotals } from "@components/Skeleton"
+import { SkeletonButton, SkeletonCartTotals } from '@components/Skeleton'
 
 const SkeletonOrderSummary = () => {
     return (

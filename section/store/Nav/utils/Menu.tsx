@@ -8,92 +8,92 @@ export const Menu = [
                 links: [
                     {
                         label: 'Trousers',
-                        href: '/search/clothing/trousers'
+                        href: '/search/clothing/trousers',
                     },
                     {
                         label: 'T-shirt',
-                        href: '/search/clothing/t-shirt'
+                        href: '/search/clothing/t-shirt',
                     },
                     {
                         label: 'Shorts',
-                        href: '/search/clothing/shorts'
+                        href: '/search/clothing/shorts',
                     },
                     {
                         label: 'Trousers',
-                        href: '/search/clothing/trousers'
+                        href: '/search/clothing/trousers',
                     },
                     {
                         label: 'T-shirt',
-                        href: '/search/clothing/t-shirt'
+                        href: '/search/clothing/t-shirt',
                     },
                     {
                         label: 'Shorts',
-                        href: '/search/clothing/shorts'
+                        href: '/search/clothing/shorts',
                     },
                     {
                         label: 'Trousers',
-                        href: '/search/clothing/trousers'
+                        href: '/search/clothing/trousers',
                     },
                     {
                         label: 'T-shirt',
-                        href: '/search/clothing/t-shirt'
+                        href: '/search/clothing/t-shirt',
                     },
                     {
                         label: 'Shorts',
-                        href: '/search/clothing/shorts'
+                        href: '/search/clothing/shorts',
                     },
                     {
                         label: 'Trousers',
-                        href: '/search/clothing/trousers'
+                        href: '/search/clothing/trousers',
                     },
-                ]
+                ],
             },
             {
                 label: 'Bekleidung',
                 links: [
                     {
                         label: 'Trousers',
-                        href: '/search/clothing/trousers'
+                        href: '/search/clothing/trousers',
                     },
                     {
                         label: 'T-shirt',
-                        href: '/search/clothing/t-shirt'
+                        href: '/search/clothing/t-shirt',
                     },
                     {
                         label: 'Shorts',
-                        href: '/search/clothing/shorts'
+                        href: '/search/clothing/shorts',
                     },
                     {
                         label: 'Trousers',
-                        href: '/search/clothing/trousers'
+                        href: '/search/clothing/trousers',
                     },
                     {
                         label: 'T-shirt',
-                        href: '/search/clothing/t-shirt'
+                        href: '/search/clothing/t-shirt',
                     },
                     {
                         label: 'Shorts',
-                        href: '/search/clothing/shorts'
+                        href: '/search/clothing/shorts',
                     },
                     {
                         label: 'Trousers',
-                        href: '/search/clothing/trousers'
+                        href: '/search/clothing/trousers',
                     },
                     {
                         label: 'T-shirt',
-                        href: '/search/clothing/t-shirt'
+                        href: '/search/clothing/t-shirt',
                     },
                     {
                         label: 'Shorts',
-                        href: '/search/clothing/shorts'
+                        href: '/search/clothing/shorts',
                     },
                     {
                         label: 'Trousers',
-                        href: '/search/clothing/trousers'
+                        href: '/search/clothing/trousers',
                     },
-                ]
+                ],
             },
-        ]
+        ],
     },
     {
         label: 'Top',
@@ -104,10 +104,10 @@ export const Menu = [
                 links: [
                     {
                         label: 'Trousers',
-                        href: '/search/clothing/trousers'
+                        href: '/search/clothing/trousers',
                     },
-                ]
-            }
-        ]
-    }
+                ],
+            },
+        ],
+    },
 ]

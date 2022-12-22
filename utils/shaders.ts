@@ -7,7 +7,7 @@ export const vertex = `
     void main() {
         vUv = uv;
         gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1);
-    }`;
+    }`
 
 export const fragment = `
     uniform float time;
@@ -28,7 +28,7 @@ export const fragment = `
         gl_FragColor = vec4(offset.r, 0.0, 0.0, 1.0);
         gl_FragColor = color;
         gl_FragColor = texture2D(uTexture, newUV - 0.02 * offset.rg);
-    }`;
+    }`
 
 export const particles = `
     uniform float time;
@@ -41,4 +41,4 @@ export const particles = `
         vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
         gl_PointSize = 1000. * (1.0 / - mvPosition.z);
         gl_Position = projectionMatrix * mvPosition;
-    }`;
+    }`

@@ -140,7 +140,6 @@
 
     90% {
         transform: scale3d(1, 0.5, 1) translate3d(0, -15px, 0);
-        ;
         transform-origin: 0% 50%;
     }
 

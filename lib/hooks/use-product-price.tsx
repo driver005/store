@@ -1,6 +1,6 @@
-import { formatAmount, useCart, useProducts } from "medusa-react"
-import { useMemo } from "react"
-import { CalculatedVariant } from "types/medusa"
+import { formatAmount, useCart, useProducts } from 'medusa-react'
+import { useMemo } from 'react'
+import { CalculatedVariant } from 'types/medusa'
 
 type useProductPriceProps = {
     id: string
@@ -28,7 +28,7 @@ const useProductPrice = ({ id, variantId }: useProductPriceProps) => {
     }
 
     const cheapestPrice = useMemo(() => {
-        if (!product || !cart?.region) {
+        if (!product || !product.variants?.length || !cart?.region) {
             return null
         }
 

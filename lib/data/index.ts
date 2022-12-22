@@ -1,5 +1,5 @@
-import { medusaClient } from "@lib/config"
-import { Product, StoreGetProductsParams } from "@medusajs/medusa"
+import { medusaClient } from '@lib/config'
+import { Product, StoreGetProductsParams } from '@medusajs/medusa'
 
 const COL_LIMIT = 15
 
@@ -27,8 +27,8 @@ const getGlobalData = async () => {
     const collections = await medusaClient.collections
         .list({ limit: COL_LIMIT })
         .then(({ collections, count }) => {
-        totalCount = count
-        return collections
+            totalCount = count
+            return collections
         })
         .catch((_) => undefined)
 
@@ -36,10 +36,10 @@ const getGlobalData = async () => {
 
     return {
         navData: {
-        hasMoreCollections: totalCount > COL_LIMIT,
-        collections:
-            collections?.map((c) => ({ id: c.id, title: c.title })) || [],
-        featuredProducts,
+            hasMoreCollections: totalCount > COL_LIMIT,
+            collections:
+                collections?.map((c) => ({ id: c.id, title: c.title })) || [],
+            featuredProducts,
         },
     }
 }
@@ -66,7 +66,7 @@ export const getProductData = async (handle: string) => {
 
     return {
         page: {
-        data: product,
+            data: product,
         },
     }
 }
@@ -75,11 +75,11 @@ const getInitialProducts = async (collectionId: string) => {
     const result = await medusaClient.products
         .list({ collection_id: [collectionId], limit: 10 })
         .then(({ products, count }) => {
-        return {
-            initialProducts: products,
-            count: count,
-            hasMore: count > 10,
-        }
+            return {
+                initialProducts: products,
+                count: count,
+                hasMore: count > 10,
+            }
         })
         .catch((_) => ({ initialProducts: [], count: 0, hasMore: false }))
 
@@ -103,8 +103,8 @@ export const getCollectionData = async (id: string) => {
 
     return {
         page: {
-        data,
-        additionalData,
+            data,
+            additionalData,
         },
         site: siteData,
     }

@@ -21,35 +21,35 @@ const initialState = {
 
 type Action =
     | {
-        type: 'OPEN_SIDEBAR'
-    }
+          type: 'OPEN_SIDEBAR'
+      }
     | {
-        type: 'CLOSE_SIDEBAR'
-    }
+          type: 'CLOSE_SIDEBAR'
+      }
     | {
-        type: 'OPEN_DROPDOWN'
-    }
+          type: 'OPEN_DROPDOWN'
+      }
     | {
-        type: 'CLOSE_DROPDOWN'
-    }
+          type: 'CLOSE_DROPDOWN'
+      }
     | {
-        type: 'OPEN_MODAL'
-    }
+          type: 'OPEN_MODAL'
+      }
     | {
-        type: 'CLOSE_MODAL'
-    }
+          type: 'CLOSE_MODAL'
+      }
     | {
-        type: 'SET_MODAL_VIEW'
-        view: MODAL_VIEWS
-    }
+          type: 'SET_MODAL_VIEW'
+          view: MODAL_VIEWS
+      }
     | {
-        type: 'SET_SIDEBAR_VIEW'
-        view: SIDEBAR_VIEWS
-    }
+          type: 'SET_SIDEBAR_VIEW'
+          view: SIDEBAR_VIEWS
+      }
     | {
-        type: 'SET_USER_AVATAR'
-        value: string
-    }
+          type: 'SET_USER_AVATAR'
+          value: string
+      }
 
 type MODAL_VIEWS =
     | 'SIGNUP_VIEW'
@@ -124,7 +124,7 @@ function uiReducer(state: State, action: Action) {
     }
 }
 
-export const UIProvider: FC = (props) => {
+export const UIProvider = (props: any) => {
     const [state, dispatch] = React.useReducer(uiReducer, initialState)
 
     const openSidebar = useCallback(
@@ -195,10 +195,27 @@ export const UIProvider: FC = (props) => {
             setSidebarView,
             setUserAvatar,
         }),
-        [state]
+        [
+            closeDropdown,
+            closeModal,
+            closeSidebar,
+            closeSidebarIfPresent,
+            openDropdown,
+            openModal,
+            openSidebar,
+            setModalView,
+            setSidebarView,
+            setUserAvatar,
+            state,
+            toggleSidebar,
+        ]
     )
 
-    return <UIContext.Provider value={value} {...props} />
+    return (
+        <UIContext.Provider value={value} {...props}>
+            {props.children}
+        </UIContext.Provider>
+    )
 }
 
 export const useUI = () => {
@@ -209,7 +226,9 @@ export const useUI = () => {
     return context
 }
 
-export const ManagedUIContext: FC<{ children: any }> = ({ children }) => (
+export const ManagedUIContext: FC<{ children: React.ReactNode }> = ({
+    children,
+}) => (
     <UIProvider>
         <ThemeProvider>{children}</ThemeProvider>
     </UIProvider>

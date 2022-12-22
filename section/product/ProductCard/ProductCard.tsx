@@ -1,9 +1,8 @@
-
-import Link from "next/link";
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import Link from 'next/link'
+import React, { Fragment, useEffect, useRef, useState } from 'react'
 // import classNames from "classnames";
 // import { Button } from "@components/ui";
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router'
 
 const styles = {
     grid: `grid grid-cols-4 gap-4`,
@@ -13,10 +12,10 @@ const styles = {
         price: `block text-md font-medium text-gray-900 dark:text-white`,
         details: `mt-4 flex justify-between text-base font-medium text-gray-900  mx-2 mt-2 dark:text-white`,
     },
-};
+}
 
 interface ProductCardProps {
-    product: any;
+    product: any
 }
 
 const ProductCard: React.VFC<ProductCardProps> = ({ product }) => {
@@ -24,19 +23,19 @@ const ProductCard: React.VFC<ProductCardProps> = ({ product }) => {
     const [open, setOpen] = useState(false)
     const [productData, setproductData] = useState(null)
     let priceDisplay =
-        product.pricing?.priceRange?.start?.gross.localizedAmount || "";
+        product.pricing?.priceRange?.start?.gross.localizedAmount || ''
     if (
         product.pricing?.priceRange?.start?.gross.amount !==
         product.pricing?.priceRange?.stop?.gross.amount
     ) {
-        priceDisplay = "from " + priceDisplay;
+        priceDisplay = 'from ' + priceDisplay
     }
-    const imageStyle: React.CSSProperties = {};
+    const imageStyle: React.CSSProperties = {}
     if (!!product.thumbnail?.url) {
-        imageStyle.backgroundImage = `url(${product.thumbnail?.url})`;
-        imageStyle.backgroundSize = "auto";
-        imageStyle.backgroundRepeat = "no-repeat";
-        imageStyle.backgroundPosition = "center";
+        imageStyle.backgroundImage = `url(${product.thumbnail?.url})`
+        imageStyle.backgroundSize = 'auto'
+        imageStyle.backgroundRepeat = 'no-repeat'
+        imageStyle.backgroundPosition = 'center'
     }
 
     const redirect = () => {
@@ -91,8 +90,12 @@ const ProductCard: React.VFC<ProductCardProps> = ({ product }) => {
                     </div>
                     <div className={styles.product.details}>
                         <div>
-                            <p className={styles.product.name}>{product.name}</p>
-                            <p className={styles.product.category}>{product.category?.name}</p>
+                            <p className={styles.product.name}>
+                                {product.name}
+                            </p>
+                            <p className={styles.product.category}>
+                                {product.category?.name}
+                            </p>
                         </div>
                         <p className={styles.product.price}>{priceDisplay}</p>
                     </div>
@@ -108,7 +111,7 @@ const ProductCard: React.VFC<ProductCardProps> = ({ product }) => {
             </figure>
             {/* <QuickView product={productData} open={open} setOpen={setOpen}  /> */}
         </Fragment>
-    );
-};
+    )
+}
 
 export default ProductCard

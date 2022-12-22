@@ -1,15 +1,16 @@
-import { Box } from "@chakra-ui/react"
-import { ProductVariant } from "@medusajs/medusa"
+import { Box } from '@chakra-ui/react'
+import { ProductVariant } from '@medusajs/medusa'
 
 type LineItemOptionsProps = { variant: ProductVariant }
 
 const LineItemOptions = ({ variant }: LineItemOptionsProps) => {
     return (
-        <Box fontSize='small' color='gray.700'>
+        <Box fontSize="small" color="gray.700">
             {variant.options.map((option) => {
                 const optionName =
-                    variant.product.options.find((opt) => opt.id === option.option_id)
-                        ?.title || "Option"
+                    variant.product.options.find(
+                        (opt) => opt.id === option.option_id
+                    )?.title || 'Option'
                 return (
                     <div key={option.id}>
                         <span>

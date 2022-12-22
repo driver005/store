@@ -1,10 +1,14 @@
-import { SkeletonCartItem, SkeletonCodeForm, SkeletonOrderSummary } from "@components/Skeleton"
-import repeat from "@lib/util/repeat"
+import {
+    SkeletonCartItem,
+    SkeletonCodeForm,
+    SkeletonOrderSummary,
+} from '@components/Skeleton'
+import repeat from '@lib/util/repeat'
 
 const SkeletonCartPage = () => {
     return (
         <div className="content-container">
-            <div className="grid grid-cols-1 small:grid-cols-[1fr_360px] gap-x-8 py-12">
+            <div className="grid grid-cols-1 sm:grid-cols-[1fr_360px] gap-x-8 py-12">
                 <div>
                     <div className="flex items-center justify-between border-b border-gray-200 pb-8">
                         <div className="w-64 h-10 bg-gray-100"></div>
